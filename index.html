@@ -49,6 +49,7 @@
                 <div class="experience-content">
                     <div class="experience-header">
                         <h3><a href="https://www.tarragonaircraft.com/" target="_blank" class="project-link">Tarragon Aircraft</a></h3>
+                        
                     </div>
                     <p class="experience-role">Engineering Intern</p>
                     <p class="experience-description">worked on high-power ultralight aircraft (300-400 km/h @ 340-650 kg)</p>
@@ -58,10 +59,14 @@
                         <li>Fuselage part structural bonding & aircraft assembly</li>
                     </ul>
                 </div>
-                <div class="model-viewer-container">
-                    <span class="experience-date">Jun 2025-Aug 2025 / Riga LV</span>
-                    <div class="image-viewer image-viewer-landscape">
+                
+                <div class="image-viewer-wrapper">
+                    <span class="experience-date">Oct 2024–Jul 2025 / Riga LV</span>
+                    <div class="image-viewer image-viewer-landscape clickable-image" data-image="aircraft">
                         <img src="./assets/images/planeTarragon.png" alt="Tarragon Aircraft" class="aircraft-img">
+                        <div class="thumb-overlay">
+                            <span class="thumb-label">view</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,23 +114,50 @@
         <section>
             <h2>Research</h2>
             
-            <div class="experience-item">
-                <div class="experience-header">
-                    <h3><a href="https://www.rtu.lv/en" target="_blank" class="project-link">Riga Technical University</a></h3>
-                    <span class="experience-date">May 2023-May 2024 / Riga, LV</span>
+            <div class="experience-item experience-item-with-images">
+                <div class="experience-content">
+                    <div class="experience-header">
+                        <h3><a href="https://www.rtu.lv/en" target="_blank" class="project-link">Riga Technical University</a></h3>
+                        
+                    </div>
+                    <p class="experience-role">Student Research Intern</p>
+                    <p class="experience-description">scientific research @ RTU Faculty of Natural Sciences and Technology</p>
+                    <ul class="experience-details">
+                        <li><a href="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf" target="_blank" class="project-link">paper</a></li>
+                        <li>Designed and manufactured an optically active memory material for photonic <br>storage & computing applications</li>
+                        <li>20 000+ datapoint analysis in MS Excel, spin-coating, acid etching, soldering, plasma cleaning</li>
+                        <li>Gold-National Student Scientific Research Conference, highest score in Engineering & <br> Technology category</li>
+                    </ul>
                 </div>
-                <p class="experience-role">Student Research Intern</p>
-                <p class="experience-description">scientific research @ RTU Faculty of Natural Sciences and Technology</p>
-                <ul class="experience-details">
-                    <li><a href="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf" target="_blank" class="project-link">paper</a></li>
-                    <li>Designed and manufactured an optically active memory material for photonic <br>storage & computing applications</li>
-                    <li>20 000+ datapoint analysis in MS Excel, spin-coating, acid etching, soldering, plasma cleaning</li>
-                    <li>Gold-National Student Scientific Research Conference, highest score in Engineering & <br> Technology category</li>
-                    
-                </ul>
+                
+                <div class="research-images-container">
+                    <span class="experience-date">May 2023-May 2024 / Riga, LV</span>
+                    <div class="research-thumbnails">
+                        
+                        <div class="research-thumb" data-image="graph">
+                            
+                            <img src="./assets/images/graph.jpg" alt="Research Graph" class="thumb-image">
+                            <div class="thumb-overlay">
+                                <span class="thumb-label">view</span>
+                            </div>
+                        </div>
+                        <div class="research-thumb" data-image="schematic">
+                            <img src="./assets/images/schematic.jpg" alt="Research Schematic" class="thumb-image">
+                            <div class="thumb-overlay">
+                                <span class="thumb-label">view</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lightbox Modal -->
+                <div id="image-lightbox" class="lightbox">
+                    <div class="lightbox-close">&times;</div>
+                    <div class="lightbox-content">
+                        <img id="lightbox-img" src="" alt="Research Image">
+                    </div>
+                </div>
             </div>
-
-            
         </section>
 
         <!-- Additional Projects -->
@@ -192,18 +224,6 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <!-- <section>
-            <h2>industry</h2>
-            <ul class="skills-list">
-                <li>7+ years of experience in full-stack web development</li>
-                <li>Proficient in Python, JavaScript, React, Node.js, and TypeScript</li>
-                <li>Strong background in machine learning and data analysis</li>
-                <li>Experience with cloud platforms (AWS, Google Cloud, Azure)</li>
-                <li>Excellent problem-solving and team collaboration skills</li>
-            </ul>
-        </section> -->
-
         <!-- Contact Section -->
         <section id="contact">
             <h2>Say hi!</h2>
@@ -269,6 +289,39 @@
                 formStatus.textContent = '';
                 formStatus.className = 'form-status';
             }, 5000);
+        });
+
+        // Research Image Lightbox
+        const thumbnails = document.querySelectorAll('.research-thumb, .clickable-image');
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        
+        const images = {
+            graph: './assets/images/graph.jpg',
+            schematic: './assets/images/schematic.jpg',
+            aircraft: './assets/images/planeTarragon.png'
+        };
+        
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                const imageKey = this.getAttribute('data-image');
+                lightboxImg.src = images[imageKey];
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        lightboxClose.addEventListener('click', function() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         });
 
         // iPhone 3D Model Viewer
