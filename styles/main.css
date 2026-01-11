@@ -246,6 +246,11 @@ h3 {
     height: 250px;
 }
 
+.image-viewer-portrait {
+    width: 280px;
+    height: 400px;
+}
+
 .clickable-image {
     cursor: pointer;
     position: relative;
@@ -690,6 +695,12 @@ h3 .project-link:hover {
         width: 100%;
         max-width: 400px;
         height: 250px;
+    }
+
+    .image-viewer-portrait {
+        width: 100%;
+        max-width: 280px;
+        height: 400px;
     }
 
     .experience-item-with-images {
