@@ -143,7 +143,7 @@
                 <!-- Lightbox Modal -->
                 <div id="image-lightbox" class="lightbox">
                     <div class="lightbox-close">&times;</div>
-                    <div class="lightbox-zoom-info">Click or scroll to zoom • Drag to pan</div>
+                    <div class="lightbox-zoom-info">Click to zoom • Drag to pan</div>
                     <div class="lightbox-content">
                         <img id="lightbox-img" src="" alt="Research Image">
                     </div>
@@ -293,18 +293,17 @@
             'research-poster': './assets/images/poster.jpg'
         };
         
-        let isZoomed = false;
-        const zoomLevel = 1.6;
+        let scale = 1;
+        let posX = 0;
+        let posY = 0;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let hasMoved = false;
+        const zoomLevel = 1.4;
 
-        function updateZoom(e) {
-            if (!isZoomed) return;
-
-            const rect = lightboxImg.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-            lightboxImg.style.transformOrigin = `${x}% ${y}%`;
-            lightboxImg.style.transform = `scale(${zoomLevel})`;
+        function updateTransform() {
+            lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
         }
 
         thumbnails.forEach(thumb => {
@@ -313,44 +312,83 @@
                 lightboxImg.src = images[imageKey];
                 lightbox.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                isZoomed = false;
+                scale = 1;
+                posX = 0;
+                posY = 0;
                 lightboxImg.style.transform = 'scale(1)';
                 lightboxImg.classList.remove('zoomed');
             });
         });
 
-        // Click to toggle zoom mode
-        lightboxImg.addEventListener('click', function(e) {
-            e.stopPropagation();
-            isZoomed = !isZoomed;
-
-            if (isZoomed) {
-                lightboxImg.classList.add('zoomed');
-                updateZoom(e);
-            } else {
-                lightboxImg.classList.remove('zoomed');
-                lightboxImg.style.transform = 'scale(1)';
-                lightboxImg.style.transformOrigin = 'center center';
+        // Mouse down - start potential drag
+        lightboxImg.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            if (scale > 1) {
+                isDragging = true;
+                dragStartX = e.clientX - posX;
+                dragStartY = e.clientY - posY;
+                hasMoved = false;
             }
         });
 
-        // Move zoom with cursor
-        lightboxImg.addEventListener('mousemove', function(e) {
-            updateZoom(e);
+        // Mouse move - drag to pan
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging && scale > 1) {
+                hasMoved = true;
+                posX = e.clientX - dragStartX;
+                posY = e.clientY - dragStartY;
+                updateTransform();
+            }
         });
 
-        // Scroll to adjust zoom level
-        lightboxImg.addEventListener('wheel', function(e) {
-            e.preventDefault();
-            if (isZoomed) {
-                updateZoom(e);
+        // Mouse up - end drag or toggle zoom
+        document.addEventListener('mouseup', function(e) {
+            if (isDragging) {
+                isDragging = false;
+            }
+        });
+
+        // Click to zoom/unzoom
+        lightboxImg.addEventListener('click', function(e) {
+            e.stopPropagation();
+
+            // If we just dragged, don't toggle zoom
+            if (hasMoved) {
+                hasMoved = false;
+                return;
+            }
+
+            if (scale === 1) {
+                // Zoom in at click position
+                const rect = lightboxImg.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                posX = (centerX - clickX) * (zoomLevel - 1);
+                posY = (centerY - clickY) * (zoomLevel - 1);
+
+                scale = zoomLevel;
+                lightboxImg.classList.add('zoomed');
+                updateTransform();
+            } else {
+                // Zoom out
+                scale = 1;
+                posX = 0;
+                posY = 0;
+                lightboxImg.classList.remove('zoomed');
+                updateTransform();
             }
         });
 
         lightboxClose.addEventListener('click', function() {
             lightbox.classList.remove('active');
             document.body.style.overflow = 'auto';
-            isZoomed = false;
+            scale = 1;
+            posX = 0;
+            posY = 0;
             lightboxImg.style.transform = 'scale(1)';
             lightboxImg.classList.remove('zoomed');
         });
@@ -359,7 +397,9 @@
             if (e.target === lightbox) {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = 'auto';
-                isZoomed = false;
+                scale = 1;
+                posX = 0;
+                posY = 0;
                 lightboxImg.style.transform = 'scale(1)';
                 lightboxImg.classList.remove('zoomed');
             }
