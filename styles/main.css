@@ -96,7 +96,7 @@ body {
 /* Content Section */
 .content-wrapper {
     background-color: #000000;
-    padding: 80px;
+    padding: 40px 80px 80px 80px;
 }
 
 /* Section Styles */
@@ -692,7 +692,7 @@ h3 .project-link:hover {
     }
 
     .content-wrapper {
-        padding: 40px 30px;
+        padding: 20px 30px 40px 30px;
     }
 
     h2 {
