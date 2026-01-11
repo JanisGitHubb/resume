@@ -216,6 +216,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    gap: 15px;
 }
 
 .experience-item-3d .model-viewer {
@@ -333,6 +334,10 @@ h3 {
 
 .research-images-container {
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
 }
 
 .research-thumbnails {
