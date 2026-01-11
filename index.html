@@ -114,7 +114,7 @@
         <section>
             <h2>Research</h2>
             
-            <div class="experience-item experience-item-with-images">
+            <div class="experience-item experience-item-3d">
                 <div class="experience-content">
                     <div class="experience-header">
                         <h3><a href="https://www.rtu.lv/en" target="_blank" class="project-link">Riga Technical University</a></h3>
@@ -130,22 +130,12 @@
                     </ul>
                 </div>
                 
-                <div class="research-images-container">
+                <div class="image-viewer-wrapper">
                     <span class="experience-date">May 2023-May 2024 / Riga, LV</span>
-                    <div class="research-thumbnails">
-                        
-                        <div class="research-thumb" data-image="graph">
-                            
-                            <img src="./assets/images/graph.jpg" alt="Research Graph" class="thumb-image">
-                            <div class="thumb-overlay">
-                                <span class="thumb-label">view</span>
-                            </div>
-                        </div>
-                        <div class="research-thumb" data-image="schematic">
-                            <img src="./assets/images/schematic.jpg" alt="Research Schematic" class="thumb-image">
-                            <div class="thumb-overlay">
-                                <span class="thumb-label">view</span>
-                            </div>
+                    <div class="image-viewer image-viewer-landscape clickable-image" data-image="research-poster">
+                        <img src="./assets/images/graph.pdf" alt="Research Poster" class="aircraft-img">
+                        <div class="thumb-overlay">
+                            <span class="thumb-label">view</span>
                         </div>
                     </div>
                 </div>
@@ -298,9 +288,8 @@
         const lightboxClose = document.querySelector('.lightbox-close');
         
         const images = {
-            graph: './assets/images/graph.jpg',
-            schematic: './assets/images/schematic.jpg',
-            aircraft: './assets/images/planeTarragon.png'
+            aircraft: './assets/images/planeTarragon.png',
+            'research-poster': './assets/images/graph.pdf'
         };
         
         thumbnails.forEach(thumb => {
