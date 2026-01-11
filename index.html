@@ -294,19 +294,22 @@
         };
         
         let scale = 1;
-        let originX = 0;
-        let originY = 0;
+        let posX = 0;
+        let posY = 0;
         let isDragging = false;
         let startX = 0;
         let startY = 0;
 
         function resetZoom() {
             scale = 1;
-            originX = 0;
-            originY = 0;
-            lightboxImg.style.transformOrigin = 'center center';
-            lightboxImg.style.transform = 'scale(1)';
+            posX = 0;
+            posY = 0;
+            lightboxImg.style.transform = 'translate(0px, 0px) scale(1)';
             lightboxImg.classList.remove('zoomed');
+        }
+
+        function updateTransform() {
+            lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
         }
 
         thumbnails.forEach(thumb => {
@@ -323,21 +326,19 @@
         lightboxImg.addEventListener('click', function(e) {
             e.stopPropagation();
 
-            const rect = lightboxImg.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-
             if (scale === 1) {
+                const rect = lightboxImg.getBoundingClientRect();
+                const offsetX = e.clientX - rect.left - rect.width / 2;
+                const offsetY = e.clientY - rect.top - rect.height / 2;
+
                 scale = 1.8;
-                originX = x;
-                originY = y;
-                lightboxImg.style.transformOrigin = `${x}% ${y}%`;
+                posX = -offsetX * (scale - 1);
+                posY = -offsetY * (scale - 1);
                 lightboxImg.classList.add('zoomed');
+                updateTransform();
             } else {
                 resetZoom();
             }
-
-            lightboxImg.style.transform = `scale(${scale})`;
         });
 
         // Scroll to zoom at cursor position
@@ -345,46 +346,45 @@
             e.preventDefault();
 
             const rect = lightboxImg.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
 
-            const delta = e.deltaY > 0 ? -0.2 : 0.2;
-            const newScale = Math.min(Math.max(1, scale + delta), 3);
+            const prevScale = scale;
+            const delta = e.deltaY > 0 ? -0.15 : 0.15;
+            scale = Math.min(Math.max(1, scale + delta), 3);
 
-            if (newScale > 1) {
-                scale = newScale;
-                originX = x;
-                originY = y;
-                lightboxImg.style.transformOrigin = `${x}% ${y}%`;
+            if (scale > 1) {
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const offsetX = mouseX - centerX;
+                const offsetY = mouseY - centerY;
+
+                posX = posX * (scale / prevScale) - offsetX * (scale - prevScale);
+                posY = posY * (scale / prevScale) - offsetY * (scale - prevScale);
+
                 lightboxImg.classList.add('zoomed');
+                updateTransform();
             } else {
                 resetZoom();
-                return;
             }
-
-            lightboxImg.style.transform = `scale(${scale})`;
         });
 
-        // Drag to pan - zoom follows cursor
+        // Drag to pan
         lightboxImg.addEventListener('mousedown', function(e) {
             if (scale > 1) {
                 isDragging = true;
-                startX = e.clientX;
-                startY = e.clientY;
+                startX = e.clientX - posX;
+                startY = e.clientY - posY;
                 e.preventDefault();
             }
         });
 
         document.addEventListener('mousemove', function(e) {
             if (isDragging) {
-                const rect = lightboxImg.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-                originX = x;
-                originY = y;
-                lightboxImg.style.transformOrigin = `${x}% ${y}%`;
-                lightboxImg.style.transform = `scale(${scale})`;
+                posX = e.clientX - startX;
+                posY = e.clientY - startY;
+                updateTransform();
             }
         });
 
