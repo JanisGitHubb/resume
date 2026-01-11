@@ -331,7 +331,7 @@
                 const offsetX = e.clientX - rect.left - rect.width / 2;
                 const offsetY = e.clientY - rect.top - rect.height / 2;
 
-                scale = 1.8;
+                scale = 1.5;
                 posX = -offsetX * (scale - 1);
                 posY = -offsetY * (scale - 1);
                 lightboxImg.classList.add('zoomed');
@@ -350,8 +350,8 @@
             const mouseY = e.clientY - rect.top;
 
             const prevScale = scale;
-            const delta = e.deltaY > 0 ? -0.15 : 0.15;
-            scale = Math.min(Math.max(1, scale + delta), 3);
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            scale = Math.min(Math.max(1, scale + delta), 2.5);
 
             if (scale > 1) {
                 const centerX = rect.width / 2;
