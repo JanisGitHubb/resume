@@ -133,7 +133,7 @@
                 <div class="image-viewer-wrapper">
                     <span class="experience-date">May 2023-May 2024 / Riga, LV</span>
                     <div class="image-viewer image-viewer-portrait clickable-image" data-image="research-poster">
-                        <img src="./assets/images/poster.jpg" alt="Research Poster" class="aircraft-img">
+                        <img src="./assets/images/poster.jpg" alt="Research Poster" class="poster-img">
                         <div class="thumb-overlay">
                             <span class="thumb-label">view</span>
                         </div>
@@ -143,6 +143,7 @@
                 <!-- Lightbox Modal -->
                 <div id="image-lightbox" class="lightbox">
                     <div class="lightbox-close">&times;</div>
+                    <div class="lightbox-zoom-info">Click or scroll to zoom • Drag to pan</div>
                     <div class="lightbox-content">
                         <img id="lightbox-img" src="" alt="Research Image">
                     </div>
@@ -292,24 +293,92 @@
             'research-poster': './assets/images/poster.jpg'
         };
         
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+
+        function resetZoom() {
+            scale = 1;
+            translateX = 0;
+            translateY = 0;
+            lightboxImg.style.transform = 'scale(1) translate(0, 0)';
+            lightboxImg.classList.remove('zoomed');
+        }
+
         thumbnails.forEach(thumb => {
             thumb.addEventListener('click', function() {
                 const imageKey = this.getAttribute('data-image');
                 lightboxImg.src = images[imageKey];
                 lightbox.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                resetZoom();
             });
         });
-        
+
+        // Click to zoom
+        lightboxImg.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (scale === 1) {
+                scale = 2.5;
+                lightboxImg.classList.add('zoomed');
+            } else {
+                resetZoom();
+            }
+            lightboxImg.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+        });
+
+        // Scroll to zoom
+        lightboxImg.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.3 : 0.3;
+            scale = Math.min(Math.max(1, scale + delta), 5);
+
+            if (scale > 1) {
+                lightboxImg.classList.add('zoomed');
+            } else {
+                resetZoom();
+                return;
+            }
+
+            lightboxImg.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+        });
+
+        // Drag to pan
+        lightboxImg.addEventListener('mousedown', function(e) {
+            if (scale > 1) {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                lightboxImg.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
         lightboxClose.addEventListener('click', function() {
             lightbox.classList.remove('active');
             document.body.style.overflow = 'auto';
+            resetZoom();
         });
-        
+
         lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = 'auto';
+                resetZoom();
             }
         });
 
