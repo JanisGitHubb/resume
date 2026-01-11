@@ -221,6 +221,13 @@ h3 {
     flex-shrink: 0;
 }
 
+.image-viewer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
 .image-viewer {
     width: 300px;
     height: 300px;
@@ -239,6 +246,45 @@ h3 {
     height: 250px;
 }
 
+.clickable-image {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.clickable-image:hover {
+    border-color: #666666;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.clickable-image .aircraft-img {
+    transition: transform 0.3s ease;
+}
+
+.clickable-image:hover .aircraft-img {
+    transform: scale(1.05);
+}
+
+.clickable-image .thumb-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 8px;
+}
+
+.clickable-image:hover .thumb-overlay {
+    opacity: 1;
+}
+
 .aircraft-img {
     width: 130%;
     height: 130%;
@@ -252,6 +298,155 @@ h3 {
     height: 100%;
     display: block;
     border-radius: 8px;
+}
+
+/* Experience item with split images */
+.experience-item-with-images {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.experience-item-with-images .experience-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.research-images-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+/* Research Images */
+.research-thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.research-thumb {
+    width: 400px;
+    height: 250px;
+    background-color: #111111;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.research-thumb:hover {
+    border-color: #666666;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.thumb-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.research-thumb:hover .thumb-image {
+    transform: scale(1.05);
+}
+
+.thumb-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.research-thumb:hover .thumb-overlay {
+    opacity: 1;
+}
+
+.thumb-label {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    animation: lightboxZoom 0.3s ease;
+}
+
+@keyframes lightboxZoom {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    font-size: 50px;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 10001;
+    transition: color 0.3s ease, transform 0.3s ease;
+    line-height: 1;
+    user-select: none;
+}
+
+.lightbox-close:hover {
+    color: #cccccc;
+    transform: rotate(90deg);
 }
 
 /* Projects */
@@ -468,6 +663,10 @@ h3 .project-link:hover {
         height: 300px;
     }
 
+    .image-viewer-wrapper {
+        align-items: center;
+    }
+
     .image-viewer {
         width: 100%;
         max-width: 300px;
@@ -478,6 +677,20 @@ h3 .project-link:hover {
         width: 100%;
         max-width: 400px;
         height: 250px;
+    }
+
+    .experience-item-with-images {
+        flex-direction: column;
+    }
+
+    .research-images-container {
+        align-items: center;
+    }
+
+    .research-thumb {
+        width: 100%;
+        max-width: 400px;
+        height: 200px;
     }
 
     .project-item-3d {
