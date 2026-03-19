@@ -899,23 +899,49 @@ body.subpage {
 
 @media (max-width: 768px) {
     .index-page {
-        padding: 0 24px;
+        padding: 0;
+        height: 100vh;
+        height: 100dvh;
     }
 
     .index-hero {
-        margin: 32px -24px 0;
+        margin: 0;
         padding: 0 24px;
-        height: 60vh;
+        width: 100%;
+    }
+
+    .index-hero-content {
+        padding: 24px 0 20px;
     }
 
     .index-name {
-        font-size: 3.2rem;
-        letter-spacing: -2px;
+        font-size: 2.8rem;
+        letter-spacing: -1.5px;
+    }
+
+    .index-center {
+        margin-bottom: 48px;
+    }
+
+    .index-sub {
+        font-size: 0.9rem;
     }
 
     .index-nav {
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 12px 20px;
+    }
+
+    .index-nav a {
+        font-size: 0.85rem;
+    }
+
+    .index-nav-spacer {
+        display: none;
+    }
+
+    .index-nav .index-link {
+        font-size: 0.75rem;
     }
 
     .nav {
@@ -931,11 +957,15 @@ body.subpage {
     }
 
     .page-hero {
-        padding: 110px 24px 32px;
+        padding: 80px 24px 24px;
+    }
+
+    .page-hero h1 {
+        font-size: 2.5rem;
     }
 
     .content-section {
-        padding: 0 24px 60px;
+        padding: 0 24px 20px;
     }
 
     .exp-block {
@@ -956,9 +986,23 @@ body.subpage {
         gap: 2px;
     }
 
+    .exp-media {
+        flex-direction: column;
+    }
+
     .exp-media-img.landscape {
         width: 100%;
         height: 200px;
+    }
+
+    .exp-media-img.square {
+        width: 100%;
+        height: auto;
+    }
+
+    .exp-media-img.wide {
+        width: 100%;
+        height: auto;
     }
 
     .exp-media-img.portrait {
@@ -966,15 +1010,43 @@ body.subpage {
         height: 320px;
     }
 
+    .exp-media-img.tricycle-img {
+        width: 100%;
+        height: 250px;
+    }
+
     .model-viewer-box {
         width: 100%;
-        max-width: 300px;
+        max-width: 100%;
         height: 260px;
+    }
+
+    .model-viewer-box.tricycle-box {
+        width: 100%;
+        height: 280px;
+    }
+
+    .gallery-preview {
+        width: 100%;
+        height: 250px;
+    }
+
+    .exp-block-with-model {
+        flex-direction: column;
     }
 
     .edu-header {
         flex-direction: column;
         gap: 4px;
+    }
+
+    .contact-hero {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .contact-hero-content {
+        padding: 80px 24px 32px;
     }
 
     .form-row {
