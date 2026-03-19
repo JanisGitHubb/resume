@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience — Janis Stendzenieks</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <nav class="nav">
+        <a href="./index.html" class="nav-logo">JS.</a>
+        <div class="nav-links">
+            <a href="./experience.html" class="active">Experience</a>
+            <a href="./projects.html">Projects</a>
+            <a href="./education.html">Education</a>
+            <a href="./contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <h1>Experience</h1>
+    </section>
+
+    <section class="content-section">
+
+        <div class="exp-block">
+            <div class="exp-block-sidebar">
+                <div class="exp-org"><a href="https://eclipse.rice.edu/" target="_blank">Rice Eclipse</a></div>
+                <div class="exp-meta">Houston TX</div>
+            </div>
+            <div class="exp-block-main">
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">Airframe Team Engineer</div>
+                        <div class="exp-desc">Design and simulations for multi-stage mach 2+ rockets</div>
+                    </div>
+                    <div class="exp-date">Feb 2026 — now</div>
+                </div>
+                <ul class="exp-details">
+                    <li>OpenRocket & RASAero rocket design and simulated flight parameter testing (launch conditions, physical rocket parameters, etc)</li>
+                    <li>Water jet machining and laser cutting various components (rocket fins, testing jigs, etc)</li>
+                    <li>Designed and built a mounting solution for ground control transmission antennas</li>
+                </ul>
+                <div class="exp-media">
+                    <div class="model-viewer-box">
+                        <canvas id="antenna-canvas"></canvas>
+                    </div>
+                    <div class="exp-media-viewer clickable-image" data-image="launchconditions">
+                        <img src="./assets/images/launchconditions.png" alt="Launch Conditions — Vertical motion vs time" class="exp-media-img square">
+                        <div class="media-overlay"><span>View ↗</span></div>
+                    </div>
+                </div>
+
+                <div class="exp-divider"></div>
+
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">Composites Team Engineer</div>
+                        <div class="exp-desc">Full rocket body development</div>
+                    </div>
+                    <div class="exp-date">Oct 2025 — now</div>
+                </div>
+                <ul class="exp-details">
+                    <li>Tip-to-tip structural reinforcement using carbon fiber and epoxy resin (vacuum sealed)</li>
+                    <li>Fiberglass-epoxy body tube and transition manufacturing, structural assembly</li>
+                    <li>Cabron fiber-fiberglass composite surface finishing for entrie rocket body</li>
+                </ul>
+                <div class="exp-media">
+                    <div class="exp-media-viewer bg-elevated clickable-image" data-image="rocketorange">
+                        <img src="./assets/images/Rocketorange.png" alt="Rocket render" class="exp-media-img wide">
+                        <div class="media-overlay"><span>View ↗</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exp-block">
+            <div class="exp-block-sidebar">
+                <div class="exp-org"><a href="https://www.tarragonaircraft.com/" target="_blank">Tarragon Aircraft</a></div>
+                <div class="exp-meta">Riga LV</div>
+            </div>
+            <div class="exp-block-main">
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">Engineering Intern</div>
+                        <div class="exp-desc">Manufacturing speed record-breaking high-power ultralight aircraft</div>
+                    </div>
+                    <div class="exp-date">Jun — Aug 2025</div>
+                </div>
+                <ul class="exp-details">
+                    <li>Carbon composite sanding & surface finishing on ultralight parts (air intake, bulkhead, ailerons, fuselage, fuel tank) for 3 different customer aircraft</li>
+                    <li>Bonded fuselage parts with aircraft-grade epoxy resin for fuselage assembly</li>
+                    <li>Machined force translation components for landing gear mechanisms – carbon tubes, joints, and more</li>
+                </ul>
+                <div class="exp-media">
+                    <div class="exp-media-viewer clickable-image" data-image="aircraft">
+                        <img src="./assets/images/planeTarragon.png" alt="Tarragon Aircraft" class="exp-media-img landscape">
+                        <div class="media-overlay"><span>View ↗</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exp-block">
+            <div class="exp-block-sidebar">
+                <div class="exp-org"><a href="https://izv.lv/#top" target="_blank">RTU EHS Automotive</a></div>
+                <div class="exp-meta">Riga LV</div>
+            </div>
+            <div class="exp-block-main">
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">Lead Mechanical Engineer</div>
+                        <div class="exp-desc">Led a team of 5 to develop high-efficiency electric tricycles</div>
+                    </div>
+                    <div class="exp-date">Oct 2024 — Jul 2025</div>
+                </div>
+                <ul class="exp-details">
+                    <li>Fully designed and manufactured 2 electric tricycles from recycled materials; assisted with 2 other e-tricycle development</li>
+                    <li>Steering mechanism & part design/machining, frame welding, controller electronics & hydraulic brake system setup, soldering</li>
+                    <li>Public showcase drive at the 2025 Latvian Song and Dance Festival: 90,000+ attendees, broadcasted live on National Television (~1.5 million viewers)</li>
+                </ul>
+                <div class="exp-media">
+                    <div class="model-viewer-box tricycle-box">
+                        <canvas id="tricycle-canvas"></canvas>
+                    </div>
+                    <div class="gallery-preview" data-gallery="car">
+                        <img src="./assets/images/car1.jpg" alt="Electric tricycle at Song Festival" class="gallery-cover">
+                        <div class="media-overlay"><span>View ↗</span></div>
+                    </div>
+                </div>
+
+                <!-- Hidden gallery images -->
+                <div class="gallery-images" id="car-gallery-images" style="display:none;">
+                    <img src="./assets/images/car1.jpg" alt="Tricycle at Song Festival">
+                    <img src="./assets/images/car2.jpg" alt="TV interview">
+                    <img src="./assets/images/car3.jpg" alt="Tricycle on track">
+                </div>
+            </div>
+        </div>
+
+        <div class="exp-block">
+            <div class="exp-block-sidebar">
+                <div class="exp-org"><a href="https://www.rtu.lv/en" target="_blank">Riga Technical University</a></div>
+                <div class="exp-meta">Riga LV</div>
+            </div>
+            <div class="exp-block-main">
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">Mechanical Engineer</div>
+                        <div class="exp-desc">Development of an electric tricycle @ RTU Power Electronics</div>
+                    </div>
+                    <div class="exp-date">Feb — Jun 2023</div>
+                </div>
+                <ul class="exp-details">
+                    <li>Assisted a team of 10 students to design & manufacture an electric low-ride tricycle</li>
+                    <li>Composite aerodynamic body & frame manufacturing, hydraulic brake system installment</li>
+                    <li>Placed 1st in the National Vehicle Energy Efficiency Competition</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="image-lightbox" class="lightbox">
+        <div class="lightbox-close">&times;</div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <a href="./index.html">← Back</a>
+        <span>2026</span>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="./scripts/lightbox.js"></script>
+    <script src="./scripts/models.js"></script>
+</body>
+</html>

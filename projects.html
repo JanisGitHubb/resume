@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects & Research — Janis Stendzenieks</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <nav class="nav">
+        <a href="./index.html" class="nav-logo">JS.</a>
+        <div class="nav-links">
+            <a href="./experience.html">Experience</a>
+            <a href="./projects.html" class="active">Projects</a>
+            <a href="./education.html">Education</a>
+            <a href="./contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <h1>Projects & More </h1>
+    </section>
+
+    <section class="content-section">
+        <div class="exp-block">
+            <div class="exp-block-sidebar">
+                <div class="exp-org">Personal Project</div>
+                <div class="exp-date">Sep 2025 — now</div>
+            </div>
+            <div class="exp-block-main">
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">iPhone POV Case</div>
+                        <div class="exp-desc">iPhone 14 body mount / phone case for POV filming</div>
+                    </div>
+                </div>
+                <ul class="exp-details">
+                    <li><a href="https://youtube.com/shorts/8xQzvJ3mD8w?feature=share" target="_blank" class="inline-link">Skiing test drive ↗</a></li>
+                    <li>Designed in Fusion 360</li>
+                    <li>3D printed case and sewed straps</li>
+                </ul>
+                <div class="exp-media">
+                    <div class="model-viewer-box">
+                        <canvas id="model-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exp-block">
+            <div class="exp-block-sidebar">
+                <div class="exp-org"><a href="https://www.rtu.lv/en" target="_blank">Riga Technical University</a></div>
+                <div class="exp-meta">Riga LV</div>
+                <div class="exp-date">May 2023 — May 2024</div>
+            </div>
+            <div class="exp-block-main">
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">Student Research Intern</div>
+                        <div class="exp-desc">Scientific research @ RTU Faculty of Natural Sciences and Technology</div>
+                    </div>
+                </div>
+                <ul class="exp-details">
+                    <li><a href="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf" target="_blank" class="inline-link">Read paper ↗</a></li>
+                    <li>Designed and manufactured an optically active memory material for photonic storage & computing applications</li>
+                    <li>20,000+ datapoint analysis in MS Excel, spin-coating, acid etching, soldering, plasma cleaning</li>
+                    <li>Gold – National Student Scientific Research Conference, highest score in Engineering & Technology category</li>
+                </ul>
+                <div class="exp-media">
+                    <div class="exp-media-viewer clickable-image" data-image="research-poster">
+                        <img src="./assets/images/poster.jpg" alt="Research Poster" class="exp-media-img portrait">
+                        <div class="media-overlay"><span>View poster ↗</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exp-block">
+            <div class="exp-block-sidebar">
+                <div class="exp-org"><a href="https://thebromodels.com/" target="_blank">BroModels</a></div>
+                <div class="exp-date">Jun 2023 — now</div>
+            </div>
+            <div class="exp-block-main">
+                <div class="exp-role-row">
+                    <div>
+                        <div class="exp-role">Fashion Model</div>
+                        <div class="exp-desc">Fashion model @ BroModel agency</div>
+                    </div>
+                </div>
+                <ul class="exp-details">
+                    <li><a href="https://thebromodels.com/new/janis" target="_blank" class="inline-link">View portfolio ↗</a></li>
+                    <li>Participated in Milano Fashion Week 2024. Had photoshoots and interacted with various fashion houses (PRADA, FENDI, ZEGNA, etc)</li>
+                    <li>Volunteered for vairous local fashion designers supporting sustainable fashion</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="image-lightbox" class="lightbox">
+        <div class="lightbox-close">&times;</div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <a href="./index.html">← Back</a>
+        <span>2026</span>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="./scripts/lightbox.js"></script>
+    <script src="./scripts/models.js"></script>
+</body>
+</html>
