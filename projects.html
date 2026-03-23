@@ -35,13 +35,38 @@
                     </div>
                 </div>
                 <ul class="exp-details">
-                    <li><a href="https://youtube.com/shorts/8xQzvJ3mD8w?feature=share" target="_blank" class="inline-link">Skiing test drive ↗</a></li>
-                    <li>Designed in Fusion 360</li>
-                    <li>3D printed case and sewed straps</li>
+                    <li>Designed in Fusion 360, 3D printed case and sewed straps</li>
                 </ul>
-                <div class="exp-media">
-                    <div class="model-viewer-box">
-                        <canvas id="model-canvas"></canvas>
+
+                <!-- Timeline -->
+                <div class="version-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker active"></div>
+                        <div class="timeline-label">V2 — Magnetic quick-release</div>
+                        <ul class="exp-details">
+                            <li>Redesigned with embedded neodymium magnets for tool-free attachment and detachment from body-mounted plate</li>
+                        </ul>
+                        <div class="timeline-content">
+                            <div class="explode-viewer-wrapper">
+                                <div class="model-viewer-box explode-box">
+                                    <canvas id="explode-canvas"></canvas>
+                                </div>
+                                <input type="range" id="explode-range" min="0" max="100" value="0" class="explode-range">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-label">V1 — 3D printed mount</div>
+                        <ul class="exp-details">
+                            <li>Initial prototype with friction-fit phone holder and sewn elastic straps</li>
+                            <li><a href="https://youtube.com/shorts/8xQzvJ3mD8w?feature=share" target="_blank" class="inline-link">Skiing test drive ↗</a></li>
+                        </ul>
+                        <div class="timeline-content">
+                            <div class="model-viewer-box">
+                                <canvas id="model-canvas"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
