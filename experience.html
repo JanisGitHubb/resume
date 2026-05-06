@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEESYE5RKE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GEESYE5RKE');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience — Janis Stendzenieks</title>
@@ -31,13 +23,13 @@
 
     <!-- ============ RICE ECLIPSE ============ -->
     <section class="exp-showcase" id="eclipse-section">
-        <div class="exp-showcase-visual exp-showcase-visual--split">
-            <img src="./assets/images/Rocketorange.png" alt="Rice Eclipse Rocket Render" class="exp-showcase-img-top">
-            <img src="./assets/images/openrocket.png" alt="Rice Eclipse OpenRocket" class="exp-showcase-img-bottom">
-            <div class="exp-showcase-overlay"></div>
-            <div class="exp-showcase-label">
+        <div class="exp-showcase-visual exp-showcase-visual--model rocket-layout">
+            <div class="povcase-top-label">
                 <h2 class="exp-showcase-title">Rice Eclipse Rocketry</h2>
                 <span class="exp-showcase-meta">Houston TX · Oct 2025 — now</span>
+            </div>
+            <canvas id="rocket-canvas" class="exp-showcase-canvas"></canvas>
+            <div class="povcase-bottom-controls">
                 <button class="exp-showcase-toggle" aria-expanded="false" aria-controls="eclipse-details">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </button>
