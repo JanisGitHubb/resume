@@ -332,57 +332,6 @@ body.subpage {
     opacity: 0.25;
 }
 
-/* Eclipse — split layout: render on top, schematic on bottom, text in middle */
-#eclipse-section .exp-showcase-visual--split {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 85vh;
-    max-height: 850px;
-    position: relative;
-    overflow: hidden;
-}
-
-.exp-showcase-img-top,
-.exp-showcase-img-bottom {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    object-fit: cover;
-    pointer-events: none;
-}
-
-.exp-showcase-img-top {
-    top: 0;
-    height: 50%;
-    object-position: center bottom;
-    opacity: 0.45;
-}
-
-.exp-showcase-img-bottom {
-    bottom: 0;
-    height: 55%;
-    object-position: center top;
-    opacity: 0.65;
-}
-
-#eclipse-section .exp-showcase-label {
-    margin-top: 4vh;
-}
-
-#eclipse-section .exp-showcase-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(245, 240, 235, 0.4) 0%,
-        rgba(245, 240, 235, 0.85) 38%,
-        rgba(245, 240, 235, 0.85) 62%,
-        rgba(245, 240, 235, 0.4) 100%
-    );
-}
-
 .exp-showcase-overlay {
     position: absolute;
     inset: 0;
@@ -402,7 +351,8 @@ body.subpage {
 
 /* POV case & Tricycle — vertical column: title, model, controls */
 #povcase-section .povcase-layout,
-#tricycle-section .tricycle-layout {
+#tricycle-section .tricycle-layout,
+#eclipse-section .rocket-layout {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -433,7 +383,8 @@ body.subpage {
 }
 
 #povcase-section .exp-showcase-canvas,
-#tricycle-section .exp-showcase-canvas {
+#tricycle-section .exp-showcase-canvas,
+#eclipse-section .exp-showcase-canvas {
     position: absolute;
     inset: 0;
     width: 100% !important;
