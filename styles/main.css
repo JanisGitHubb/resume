@@ -382,6 +382,25 @@ body.subpage {
     gap: 12px;
 }
 
+/* Floating background canvas inside a role block */
+.exp-detail-role--with-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.exp-detail-role--with-bg > *:not(.exp-role-bg-canvas) {
+    position: relative;
+    z-index: 1;
+}
+
+.exp-role-bg-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    cursor: grab;
+}
+
 #povcase-section .exp-showcase-canvas,
 #tricycle-section .exp-showcase-canvas,
 #eclipse-section .exp-showcase-canvas {
@@ -640,8 +659,6 @@ body.subpage {
 .exp-model-inline {
     width: 300px;
     height: 300px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
     overflow: hidden;
     position: relative;
     cursor: grab;
@@ -653,13 +670,38 @@ body.subpage {
 
 .exp-model-inline canvas {
     display: block;
-    background: #EDE8E2;
     opacity: 0;
     transition: opacity 0.3s;
 }
 
 .exp-model-inline canvas.ready {
     opacity: 1;
+}
+
+.exp-model-inline--fins {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 300px;
+    margin-top: -25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.exp-detail-media--fins {
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.exp-detail-media--fins .exp-media-viewer {
+    flex: 0 0 400px;
+}
+
+.exp-detail-media--fins .exp-media-viewer .exp-media-img.landscape {
+    width: 400px;
+    height: 260px;
+    object-fit: cover;
+    object-position: top;
 }
 
 /* Experience blocks */
@@ -950,7 +992,18 @@ body.subpage {
 
 .exp-media-img.portrait {
     width: 280px;
-    height: 400px;
+    height: 232px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.exp-detail-role--sidebar {
+    overflow: hidden;
+}
+
+.exp-media-sidebar {
+    float: right;
+    margin: 0 0 16px 28px;
 }
 
 /* Accent bar on images — removed */
@@ -1554,6 +1607,11 @@ body.subpage {
         height: 320px;
     }
 
+    .exp-media-sidebar {
+        float: none;
+        margin: 16px 0;
+    }
+
     .exp-media-img.tricycle-img {
         width: 100%;
         height: 250px;
@@ -1635,6 +1693,15 @@ body.subpage {
 
     .exp-detail-media {
         flex-direction: column;
+    }
+
+    .exp-detail-media--fins .exp-media-viewer {
+        flex: 0 0 auto;
+    }
+
+    .exp-detail-media--fins .exp-media-viewer .exp-media-img.landscape {
+        width: 100%;
+        height: auto;
     }
 
     .exp-model-inline {
