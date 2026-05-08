@@ -12,7 +12,8 @@
         openrocket: './assets/images/openrocket.png',
         launchconditions: './assets/images/launchconditions.png',
         rocketorange: './assets/images/Rocketorange.png',
-        car1: './assets/images/car1.jpg'
+        car1: './assets/images/car1.jpg',
+        'fins-poster': './assets/images/Eclipse_Sander_Final_Poster.png'
     };
 
     const galleryImages = {
