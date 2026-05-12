@@ -57,13 +57,15 @@
                 prev = { x: e.offsetX, y: e.offsetY };
             });
 
-            // Touch support for mobile
+            // Touch support for mobile — only when interactive
             canvas.addEventListener('touchstart', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault(); drag = true;
                 var t = e.touches[0], r = canvas.getBoundingClientRect();
                 prev = { x: t.clientX - r.left, y: t.clientY - r.top };
             }, { passive: false });
             canvas.addEventListener('touchmove', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault(); if (!drag) return;
                 var t = e.touches[0], r = canvas.getBoundingClientRect();
                 var tx = t.clientX - r.left, ty = t.clientY - r.top;
@@ -164,13 +166,15 @@
                 prev = { x: e.offsetX, y: e.offsetY };
             });
 
-            // Touch support for mobile
+            // Touch support for mobile — only when interactive
             canvas.addEventListener('touchstart', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault(); drag = true;
                 var t = e.touches[0], r = canvas.getBoundingClientRect();
                 prev = { x: t.clientX - r.left, y: t.clientY - r.top };
             }, { passive: false });
             canvas.addEventListener('touchmove', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault(); if (!drag) return;
                 var t = e.touches[0], r = canvas.getBoundingClientRect();
                 var tx = t.clientX - r.left, ty = t.clientY - r.top;
@@ -310,13 +314,15 @@
                 prev = { x: e.offsetX, y: e.offsetY };
             });
 
-            // Touch support for mobile
+            // Touch support for mobile — only when interactive
             canvas.addEventListener('touchstart', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault(); drag = true;
                 var t = e.touches[0], r = canvas.getBoundingClientRect();
                 prev = { x: t.clientX - r.left, y: t.clientY - r.top };
             }, { passive: false });
             canvas.addEventListener('touchmove', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault(); if (!drag) return;
                 var t = e.touches[0], r = canvas.getBoundingClientRect();
                 var tx = t.clientX - r.left, ty = t.clientY - r.top;
@@ -497,19 +503,20 @@
                 prev = { x: e.offsetX, y: e.offsetY };
             });
 
-            // Touch support for mobile
+            // Touch support for mobile — only when interactive
             canvas.addEventListener('touchstart', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault();
                 var touch = e.touches[0];
                 var rect = canvas.getBoundingClientRect();
                 prev = { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
                 drag = true;
-                // Use touch coordinates for raycasting
                 var fakeEvent = { clientX: touch.clientX, clientY: touch.clientY };
                 activeFin = getHoveredFin(fakeEvent);
                 if (activeFin >= 0) spinners[activeFin].paused = true;
             }, { passive: false });
             canvas.addEventListener('touchmove', function(e) {
+                if (canvas.dataset.interactive !== 'true') return;
                 e.preventDefault();
                 if (!drag) return;
                 var touch = e.touches[0];
@@ -563,4 +570,27 @@
     if (fc) setupFins(fc, [
         './assets/models/fin2.stl'
     ]);
+
+    // Interact button — toggles touch interaction on showcase models (mobile)
+    document.querySelectorAll('.interact-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var canvasId = btn.getAttribute('data-canvas');
+            var canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            var isActive = canvas.dataset.interactive === 'true';
+            // Deactivate all other canvases first
+            document.querySelectorAll('.interact-btn').forEach(function(other) {
+                var otherId = other.getAttribute('data-canvas');
+                var otherCanvas = document.getElementById(otherId);
+                if (otherCanvas) otherCanvas.dataset.interactive = 'false';
+                other.classList.remove('active');
+                other.textContent = 'Interact ↻';
+            });
+            if (!isActive) {
+                canvas.dataset.interactive = 'true';
+                btn.classList.add('active');
+                btn.textContent = 'Done ✓';
+            }
+        });
+    });
 })();
