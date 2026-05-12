@@ -57,6 +57,22 @@
                 prev = { x: e.offsetX, y: e.offsetY };
             });
 
+            // Touch support for mobile
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault(); drag = true;
+                var t = e.touches[0], r = canvas.getBoundingClientRect();
+                prev = { x: t.clientX - r.left, y: t.clientY - r.top };
+            }, { passive: false });
+            canvas.addEventListener('touchmove', function(e) {
+                e.preventDefault(); if (!drag) return;
+                var t = e.touches[0], r = canvas.getBoundingClientRect();
+                var tx = t.clientX - r.left, ty = t.clientY - r.top;
+                mesh.rotation.y += (tx - prev.x) * 0.01;
+                mesh.rotation.x += (ty - prev.y) * 0.01;
+                prev = { x: tx, y: ty };
+            }, { passive: false });
+            canvas.addEventListener('touchend', function() { drag = false; });
+
             if (isShowcase) {
                 window.addEventListener('resize', () => {
                     const nw = canvas.parentElement.clientWidth;
@@ -147,6 +163,22 @@
                 }
                 prev = { x: e.offsetX, y: e.offsetY };
             });
+
+            // Touch support for mobile
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault(); drag = true;
+                var t = e.touches[0], r = canvas.getBoundingClientRect();
+                prev = { x: t.clientX - r.left, y: t.clientY - r.top };
+            }, { passive: false });
+            canvas.addEventListener('touchmove', function(e) {
+                e.preventDefault(); if (!drag) return;
+                var t = e.touches[0], r = canvas.getBoundingClientRect();
+                var tx = t.clientX - r.left, ty = t.clientY - r.top;
+                pivot.rotation.y += (tx - prev.x) * 0.01;
+                pivot.rotation.x += (ty - prev.y) * 0.01;
+                prev = { x: tx, y: ty };
+            }, { passive: false });
+            canvas.addEventListener('touchend', function() { drag = false; });
 
             (function animate() {
                 requestAnimationFrame(animate);
@@ -277,6 +309,22 @@
                 }
                 prev = { x: e.offsetX, y: e.offsetY };
             });
+
+            // Touch support for mobile
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault(); drag = true;
+                var t = e.touches[0], r = canvas.getBoundingClientRect();
+                prev = { x: t.clientX - r.left, y: t.clientY - r.top };
+            }, { passive: false });
+            canvas.addEventListener('touchmove', function(e) {
+                e.preventDefault(); if (!drag) return;
+                var t = e.touches[0], r = canvas.getBoundingClientRect();
+                var tx = t.clientX - r.left, ty = t.clientY - r.top;
+                tilt.rotation.y += (tx - prev.x) * 0.01;
+                tilt.rotation.x += (ty - prev.y) * 0.01;
+                prev = { x: tx, y: ty };
+            }, { passive: false });
+            canvas.addEventListener('touchend', function() { drag = false; });
 
             if (isShowcase) {
                 window.addEventListener('resize', () => {
