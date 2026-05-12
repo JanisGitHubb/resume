@@ -2,6 +2,7 @@
     function setup(canvas, stlPath, camZ, initRotY) {
         const w = canvas.parentElement.clientWidth || 300;
         const h = canvas.parentElement.clientHeight || 300;
+        const initAspect = w / h;
         const isShowcase = canvas.classList.contains('exp-showcase-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, w / h, 1, 5000);
@@ -13,6 +14,21 @@
         renderer.render(scene, camera);
         canvas.classList.add('ready');
         canvas.style.cursor = 'grab';
+
+        function adaptCamera(nw, nh) {
+            var aspect = nw / nh;
+            camera.aspect = aspect;
+            // Pull camera back on narrow screens so model stays fully visible
+            if (aspect < initAspect) {
+                camera.position.z = camZ * (initAspect / aspect);
+            } else {
+                camera.position.z = camZ;
+            }
+            camera.updateProjectionMatrix();
+            renderer.setSize(nw, nh);
+        }
+        // Apply immediately in case we're already on mobile
+        adaptCamera(w, h);
         // Lighting: lower ambient so shadows are deeper, multiple directional for edge definition
         scene.add(new THREE.AmbientLight(0xffffff, 0.35));
         const d1 = new THREE.DirectionalLight(0xffffff, 0.9); d1.position.set(2, 3, 2); scene.add(d1);
@@ -45,9 +61,7 @@
                 window.addEventListener('resize', () => {
                     const nw = canvas.parentElement.clientWidth;
                     const nh = canvas.parentElement.clientHeight;
-                    camera.aspect = nw / nh;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(nw, nh);
+                    adaptCamera(nw, nh);
                 });
             }
         });
@@ -57,6 +71,7 @@
     function setupExplode(canvas, casePath, strapPath, camZ) {
         const w = canvas.parentElement.clientWidth || 300;
         const h = canvas.parentElement.clientHeight || 300;
+        const initAspect = w / h;
         const isShowcase = canvas.classList.contains('exp-showcase-canvas');
         const scene = new THREE.Scene();
         if (!isShowcase) {
@@ -74,6 +89,19 @@
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.render(scene, camera);
         canvas.classList.add('ready');
+
+        function adaptCamera(nw, nh) {
+            var aspect = nw / nh;
+            camera.aspect = aspect;
+            if (aspect < initAspect) {
+                camera.position.z = camZ * (initAspect / aspect);
+            } else {
+                camera.position.z = camZ;
+            }
+            camera.updateProjectionMatrix();
+            renderer.setSize(nw, nh);
+        }
+        adaptCamera(w, h);
 
         scene.add(new THREE.AmbientLight(0xffffff, 0.35));
         const d1 = new THREE.DirectionalLight(0xffffff, 0.9); d1.position.set(2, 3, 2); scene.add(d1);
@@ -155,9 +183,7 @@
             window.addEventListener('resize', () => {
                 const nw = canvas.parentElement.clientWidth;
                 const nh = canvas.parentElement.clientHeight;
-                camera.aspect = nw / nh;
-                camera.updateProjectionMatrix();
-                renderer.setSize(nw, nh);
+                adaptCamera(nw, nh);
             });
         }
     }
@@ -166,6 +192,7 @@
     function setupRocket(canvas, stlPath) {
         const w = canvas.parentElement.clientWidth || 300;
         const h = canvas.parentElement.clientHeight || 300;
+        const initAspect = w / h;
         const isShowcase = canvas.classList.contains('exp-showcase-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, w / h, 1, 50000);
@@ -222,6 +249,13 @@
             fitDist *= 0.85;
             camera.position.set(0, 0, fitDist);
 
+            var baseFitDist = fitDist;
+
+            // Apply immediately for mobile
+            if (w / h < initAspect) {
+                camera.position.z = baseFitDist * (initAspect / (w / h));
+            }
+
             let drag = false, prev = { x: 0, y: 0 };
             canvas.style.cursor = 'grab';
 
@@ -248,7 +282,13 @@
                 window.addEventListener('resize', () => {
                     const nw = canvas.parentElement.clientWidth;
                     const nh = canvas.parentElement.clientHeight;
-                    camera.aspect = nw / nh;
+                    var aspect = nw / nh;
+                    camera.aspect = aspect;
+                    if (aspect < initAspect) {
+                        camera.position.z = baseFitDist * (initAspect / aspect);
+                    } else {
+                        camera.position.z = baseFitDist;
+                    }
                     camera.updateProjectionMatrix();
                     renderer.setSize(nw, nh);
                 });
@@ -258,8 +298,9 @@
 
     // Fins viewer — fins scattered chaotically, normalized to same size, each rolling on own axis
     function setupFins(canvas, finPaths) {
-        const w = canvas.parentElement.clientWidth || 300;
-        const h = canvas.parentElement.clientHeight || 300;
+        const parent = canvas.parentElement;
+        const w = parent.clientWidth || 300;
+        const h = parent.clientHeight || 300;
         const isTransparent = true;
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, w / h, 1, 50000);
@@ -269,6 +310,19 @@
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.render(scene, camera);
         canvas.classList.add('ready');
+
+        // Resize when parent becomes visible (details panel opens)
+        if (typeof ResizeObserver !== 'undefined') {
+            new ResizeObserver(function() {
+                var pw = parent.clientWidth;
+                var ph = parent.clientHeight;
+                if (pw > 0 && ph > 0) {
+                    renderer.setSize(pw, ph);
+                    camera.aspect = pw / ph;
+                    camera.updateProjectionMatrix();
+                }
+            }).observe(parent);
+        }
 
         scene.add(new THREE.AmbientLight(0xffffff, 0.35));
         const d1 = new THREE.DirectionalLight(0xffffff, 0.9); d1.position.set(2, 3, 2); scene.add(d1);
@@ -393,6 +447,38 @@
                     canvas.style.cursor = hovered >= 0 ? 'grab' : 'default';
                 }
                 prev = { x: e.offsetX, y: e.offsetY };
+            });
+
+            // Touch support for mobile
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                var touch = e.touches[0];
+                var rect = canvas.getBoundingClientRect();
+                prev = { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+                drag = true;
+                // Use touch coordinates for raycasting
+                var fakeEvent = { clientX: touch.clientX, clientY: touch.clientY };
+                activeFin = getHoveredFin(fakeEvent);
+                if (activeFin >= 0) spinners[activeFin].paused = true;
+            }, { passive: false });
+            canvas.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                if (!drag) return;
+                var touch = e.touches[0];
+                var rect = canvas.getBoundingClientRect();
+                var tx = touch.clientX - rect.left;
+                var ty = touch.clientY - rect.top;
+                if (activeFin !== null && activeFin >= 0) {
+                    var s = spinners[activeFin].spinner;
+                    s.rotation.y += (tx - prev.x) * 0.01;
+                    s.rotation.x += (ty - prev.y) * 0.01;
+                }
+                prev = { x: tx, y: ty };
+            }, { passive: false });
+            canvas.addEventListener('touchend', function() {
+                drag = false;
+                if (activeFin >= 0) spinners[activeFin].paused = false;
+                activeFin = null;
             });
 
             (function animate() {
