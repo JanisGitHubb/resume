@@ -3,35 +3,520 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janis Stendzenieks</title>
+    <title>Jānis Stendzenieks</title>
     <link rel="stylesheet" href="./styles/main.css">
+    <style>
+        /* RTU logo sits inside the spacer zone at the top of the optical memory detail */
+        #project-opticalmemory {
+            position: relative;
+        }
+        .project-detail-institution-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 22vh;
+            min-height: 140px;
+            pointer-events: none;
+            margin-bottom: 0;
+        }
+        .institution-logo {
+            width: clamp(320px, 65%, 520px);
+            opacity: 0.9;
+        }
+        #project-opticalmemory .detail-role {
+            position: relative;
+            z-index: 1;
+        }
+        #project-opticalmemory h2,
+        #project-opticalmemory .detail-date {
+            position: relative;
+            z-index: 1;
+        }
+        #project-opticalmemory h2 {
+            margin-top: 12px;
+        }
+        #project-opticalmemory .detail-date {
+            margin-bottom: 16px;
+        }
+
+        /* ── Inline PDF embed ── */
+        .pdf-embed-block {
+            margin: 16px 0 20px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .pdf-embed-title {
+            padding: 10px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            letter-spacing: 0.01em;
+            background: var(--surface, #F5F0EB);
+        }
+        .pdf-embed-frame-wrap {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            cursor: pointer;
+        }
+        .pdf-embed-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            pointer-events: auto;
+        }
+        .pdf-expand-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(26,26,26,0.72);
+            color: #F5F0EB;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 5;
+            transition: background 0.15s;
+            pointer-events: auto;
+            user-select: none;
+        }
+        .pdf-expand-btn:hover {
+            background: rgba(26,26,26,0.92);
+        }
+
+        /* ── PDF Lightbox ── */
+        #pdf-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(26,26,26,0.94);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s, visibility 0.25s;
+        }
+        #pdf-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        #pdf-lightbox-close {
+            position: absolute;
+            top: 22px;
+            right: 34px;
+            font-size: 34px;
+            color: #F5F0EB;
+            cursor: pointer;
+            z-index: 10001;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+        #pdf-lightbox-close:hover { color: #999; }
+        #pdf-lightbox-inner {
+            width: min(92vw, 900px);
+            height: 88vh;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            background: #fff;
+        }
+        #pdf-lightbox-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="index-page">
-        <div class="index-hero">
-            <img src="./assets/images/cover.jpg" alt="" class="index-hero-bg">
-            <div class="index-hero-overlay"></div>
-            <div class="index-hero-content">
-                <div class="index-top">
-                    <span class="index-label">Houston TX / Riga LV</span>
+    <!-- Background image -->
+    <img src="./assets/images/cover.jpg" alt="" class="home-bg" id="home-bg">
+
+    <!-- Persistent 3D canvas -->
+    <canvas id="scene-canvas"></canvas>
+
+    <!-- ===== HOME STATE ===== -->
+    <div class="state state--home active" id="state-home">
+        <div class="home-content">
+            <h1 class="home-name">Jānis<br>Stendzenieks</h1>
+            <p class="home-sub">Mechanical Engineering — Rice University '29</p>
+        </div>
+        <nav class="home-nav">
+            <a href="#" data-section="experience">Experience</a>
+            <a href="#" data-section="projects">Projects</a>
+            <a href="#" data-section="education">Education</a>
+            <a href="#" data-section="contact">Contact</a>
+        </nav>
+        <span class="home-label">Houston TX / Riga LV</span>
+    </div>
+
+    <!-- ===== TOP NAV (subpages) ===== -->
+    <nav class="top-nav" id="top-nav">
+        <a href="#" class="top-nav-back" data-section="home">Home</a>
+        <div class="top-nav-links">
+            <a href="#" data-section="experience">Experience</a>
+            <a href="#" data-section="projects">Projects</a>
+            <a href="#" data-section="education">Education</a>
+            <a href="#" data-section="contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ===== EXPERIENCE STATE ===== -->
+    <div class="state state--section" id="state-experience">
+        <div class="section-scroll">
+            <div class="logo-stage" id="exp-logos">
+                <div class="logo-item logo-item--wide-gap" data-detail="timtec">
+                    <img src="./assets/images/timtec-logo.png" alt="TIMTEC">
+                    <span class="exp-meta">Vipava, Slovenia | Apr - Jun 2026</span>
                 </div>
-                <div class="index-center">
-                    <h1 class="index-name">Jānis<br>Stendzenieks</h1>
-                    <p class="index-sub">Mechanical Engineering — Rice University '29</p>
+                <div class="logo-item" data-detail="eclipse">
+                    <img src="./assets/images/eclipse-logo.png" alt="Rice Eclipse">
+                    <span class="exp-meta">Houston TX, USA | Oct 2025 - now</span>
                 </div>
-                <nav class="index-nav">
-                    <a href="./experience.html">Experience</a>
-                    <a href="./projects.html">Projects & Research</a>
-                    <a href="./education.html">Education</a>
-                    <a href="./contact.html">Contact</a>
-                    <span class="index-nav-spacer"></span>
-                </nav>
+                <div class="logo-item logo-item--wide-gap" data-detail="tarragon">
+                    <img src="./assets/images/tarragon-logo.svg" alt="Tarragon Aircraft">
+                    <span class="exp-meta">Riga, Latvia | Jun - Aug 2025</span>
+                </div>
             </div>
-            <div class="index-hero-accent"></div>
+
+            <div class="detail-panel" id="detail-timtec">
+                <button class="detail-back">← Back</button>
+                <h2><a href="https://www.timtec.eu/" target="_blank">TIMTEC</a></h2>
+                <span class="detail-date">Vipava, Slovenia | Apr - Jun 2026</span>
+                <div class="detail-role">
+                    <h3>Mechanical Engineering Intern</h3>
+                    <p>Defence technology R&D - unmanned systems</p>
+                    <ul>
+                        <li>Worked on a classified underwater drone project for defence applications</li>
+                        <li>Researched firmware solutions for AUV systems - later integrated into working prototype</li>
+                        <li>Wrote technical research reports for respective solutions and designed information input/output schematics for embedded control systems; participated in multiple prototype field tests</li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detail-panel" id="detail-eclipse">
+                <button class="detail-back">← Back</button>
+                <h2><a href="https://eclipse.rice.edu/" target="_blank">Rice Eclipse Rocketry</a></h2>
+                <span class="detail-date">Houston TX | Oct 2025 - now</span>
+                <div class="detail-role">
+                    <h3>Lead Engineer - Eclipse Sander</h3>
+                    <p>Adjustable sanding jig for manufacturing consistent rocket fins</p>
+                    <div class="detail-role-media" id="poster-viewer">
+                        <img src="./assets/images/Eclipse_Sander_Final_Poster.png" alt="Eclipse Sander Poster" class="detail-role-img">
+                        <div class="media-overlay"><span>View poster ↗</span></div>
+                    </div>
+                    <ul>
+                        <li>Designed and built an adjustable sanding jig improving rocket fin bevel accuracy and consistency across rocket fin sets</li>
+                        <li>The design eliminated excessive fin scrap compared to significant material waste with the previous methods used by Rice Eclipse</li>
+                        <li>Fusion 360 CAD, laser cutting, 3D printing and part machining, woodworking, technical report writing</li>
+                    </ul>
+                </div>
+                <div class="detail-role">
+                    <h3>Airframe Team Engineer</h3>
+                    <p>Design and simulations for multi-stage collegiate-level rockets</p>
+                    <div class="detail-role-media detail-role-media--model">
+                        <canvas id="clamp-canvas"></canvas>
+                    </div>
+                    <ul>
+                        <li>OpenRocket & RASAero rocket design and simulated flight testing for Mach 2+ rockets Prestige V2 and Aurora + Helios</li>
+                        <li>Designed and built a mounting solution for ground control transmission antennas</li>
+                        <li>Water jet machining, laser cutting, Fusion 360 CAD and 3D printing various components</li>
+                    </ul>
+                </div>
+                <div class="detail-role">
+                    <h3>Composites Team Engineer</h3>
+                    <p>Full rocket body development for multi-stage collegiate-level rockets</p>
+                    <ul>
+                        <li>Developed the full aerodynamic body for Prestige V2 and Aurora + Helios rockets</li>
+                        <li>Body tube and transition manufacturing, tip-to-tip structural reinforcement using carbon fiber and epoxy resin, fin manufacturing and bevelling</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detail-panel" id="detail-tarragon">
+                <button class="detail-back">← Back</button>
+                <h2><a href="https://www.tarragonaircraft.com/" target="_blank">Tarragon Aircraft</a></h2>
+                <span class="detail-date">Riga LV | Jun - Aug 2025</span>
+                <div class="detail-role">
+                    <h3>Mechanical Engineering Intern</h3>
+                    <p>Manufacturing speed record-breaking high-power ultralight aircraft</p>
+                    <div class="detail-role-media" id="tarragon-img-viewer">
+                        <img src="./assets/images/planeTarragon.png" alt="Tarragon Aircraft" class="detail-role-img">
+                        <div class="media-overlay"><span>View ↗</span></div>
+                    </div>
+                    <ul>
+                        <li>Worked on 3 different customer aircraft - carbon composite sanding & surface finishing on ultralight parts (air intake, bulkhead, ailerons, fuselage, fuel tank)</li>
+                        <li>Bonded fuselage parts with aircraft-grade epoxy resin for fuselage assembly</li>
+                        <li>Machined force translation components for landing gear mechanisms - carbon tubes, joints, and more</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
-<script src="./scripts/transitions.js"></script>
+    <!-- ===== PROJECTS STATE ===== -->
+    <div class="state state--section" id="state-projects">
+        <div class="section-scroll section-scroll--center">
+            <div class="project-cards" id="project-cards">
+                <div class="project-card" data-project="povcase">
+                    <h3>iPhone POV Case</h3>
+                    <span class="project-meta">Houston TX, USA | Sep 2025 - now</span>
+                </div>
+                <div class="project-card" data-project="tricycle">
+                    <h3>Electric Tricycle</h3>
+                    <span class="project-meta">Riga, Latvia | Oct 2024 - Jul 2025</span>
+                </div>
+                <div class="project-card" data-project="opticalmemory">
+                    <h3>Optical Material Research</h3>
+                    <span class="project-meta">Riga, Latvia | May 2023 - May 2024</span>
+                </div>
+                <div class="project-card" data-project="modelling">
+                    <h3>Fashion Model</h3>
+                    <span class="project-meta">Riga, Latvia | Jun 2023 - now</span>
+                </div>
+            </div>
+
+            <!-- POV Case Detail -->
+            <div class="project-detail" id="project-povcase">
+                <button class="detail-back project-back">← Back</button>
+                <div class="project-detail-spacer"></div>
+                <h2>iPhone POV Case</h2>
+                <span class="detail-date">Personal Project | Sep 2025 - now</span>
+                <div class="project-detail-controls">
+                    <label for="explode-range">Explode View</label>
+                    <input type="range" id="explode-range" min="0" max="100" value="70" class="explode-range">
+                </div>
+                <div class="detail-role">
+                    <h3>Magnetic Quick-Release</h3>
+                    <p>Latest iteration with quick attachment/detachment function</p>
+                    <ul>
+                        <li>Cost-effective phone camera concept motivated by rising prices for POV cameras like GoPro and Insta360</li>
+                        <li>Designed a two-part magnetic mounting system - phone case + chest plate with embedded magnets</li>
+                        <li>3D printed case + chestplate, elastic straps</li>
+                    </ul>
+                </div>
+                <div class="detail-role-pair">
+                    <div class="detail-role">
+                        <h3>Regular Mount</h3>
+                        <p>First prototype iteration</p>
+                        <div class="detail-role-media detail-role-media--model">
+                            <canvas id="v1-mount-canvas"></canvas>
+                        </div>
+                        <ul>
+                            <li>Rigid 3D printed phone holder designed around iPhone 14 dimensions</li>
+                            <li>Nylon webbing chest harness</li>
+                        </ul>
+                    </div>
+                    <div class="detail-role detail-role--videos">
+                        <h3>Test Footage</h3>
+                        <div class="video-pair">
+                            <a class="video-thumb-card" href="https://www.youtube.com/watch?v=AhAVe5XNYBc" target="_blank">
+                                <img src="./assets/images/thumbnail1.png" alt="Basketball test">
+                                <div class="video-thumb-overlay">
+                                    <span>▶ Watch on YouTube</span>
+                                </div>
+                                <span class="video-label">Basketball test (V2)</span>
+                            </a>
+                            <a class="video-thumb-card" href="https://www.youtube.com/watch?v=8xQzvJ3mD8w" target="_blank">
+                                <img src="./assets/images/thumbnail2.png" alt="Skiing test">
+                                <div class="video-thumb-overlay">
+                                    <span>▶ Watch on YouTube</span>
+                                </div>
+                                <span class="video-label">Skiing test (V1)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optical Memory Detail -->
+            <div class="project-detail" id="project-opticalmemory">
+                <button class="detail-back project-back">← Back</button>
+                <div class="project-detail-institution-logo">
+                    <img src="./assets/images/rtu-logo.png" alt="Riga Technical University" class="institution-logo">
+                </div>
+                <h2><a href="https://www.rtu.lv/en" target="_blank">Optical Memory Research</a></h2>
+                <span class="detail-date">RTU Engineering High School | May 2023 - May 2024</span>
+                <div class="detail-role">
+                    <h3>Student Research Intern</h3>
+                    <p>Scientific research at RTU Faculty of Natural Sciences and Technology</p>
+                    <ul>
+                        <li>Designed and manufactured an optically active memory material for photonic storage &amp; computing applications</li>
+                        <li>Gold – National Student Scientific Research Conference, highest score in Engineering &amp; Technology category</li>
+                        <li>20,000+ datapoint analysis in MS Excel, spin-coating, acid etching, soldering, plasma cleaning</li>
+                    </ul>
+                    <div class="pdf-embed-block" id="pdf-embed-inline">
+                        <div class="pdf-embed-title">Development of Ta-TiO₂ nanoparticle-based transient optical memory material</div>
+                        <div class="pdf-embed-frame-wrap" id="pdf-frame-wrap">
+                            <iframe
+                                src="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf"
+                                class="pdf-embed-iframe"
+                                id="pdf-iframe-inline"
+                                title="Optical Memory Research Paper">
+                            </iframe>
+                            <div class="pdf-expand-btn" id="pdf-expand-btn" title="Expand paper">
+                                <span>⤢ Expand</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tricycle Detail -->
+            <div class="project-detail" id="project-tricycle">
+                <button class="detail-back project-back">← Back</button>
+                <div class="project-detail-spacer"></div>
+                <h2>Electric Tricycle</h2>
+                <span class="detail-date">Riga LV | Oct 2024 - Jul 2025</span>
+                <div class="detail-role">
+                    <h3>Lead Mechanical Engineer</h3>
+                    <p>Led a team of 5 to develop high-efficiency electric tricycles from recycled materials</p>
+                    <ul>
+                        <li>Fully designed and manufactured 2 electric tricycles from recycled materials, assisted with 2 other e-tricycle builds</li>
+                        <li>Public showcase drive at the 2025 Latvian Song and Dance Festival: 90,000+ attendees, broadcasted live on National Television (~1.5 million viewers)</li>
+                        <li>Steering mechanism & part design/machining, frame welding, controller electronics & hydraulic brake system setup, soldering</li>
+                    </ul>
+                    <div class="detail-gallery-preview" data-gallery="car" data-index="0">
+                        <img src="./assets/images/car1.jpg" alt="Electric tricycle at Song Festival">
+                        <div class="media-overlay"><span>1 / 3 </span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modelling Detail -->
+            <div class="project-detail" id="project-modelling">
+                <button class="detail-back project-back">← Back</button>
+                <div class="project-detail-spacer"></div>
+                <h2>Fashion Model</h2>
+                <span class="detail-date">BroModels | Jun 2023 - now</span>
+                <div class="detail-role">
+                    <h3>Fashion Model</h3>
+                    <p>Fashion model at BroModel agency</p>
+                    <ul>
+                        <li><a href="https://thebromodels.com/new/janis" target="_blank" class="inline-link">View portfolio ↗</a></li>
+                        <li>Participated in Milano Fashion Week 2024. Had photoshoots and interacted with various fashion houses (PRADA, FENDI, ZEGNA, etc)</li>
+                        <li>Volunteered for various local fashion designers supporting sustainable fashion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="state state--section" id="state-education">
+        <div class="section-scroll section-scroll--center">
+            <div class="edu-content">
+                <div class="edu-block">
+                    <h3><a href="https://engineering.rice.edu/" target="_blank">BS - Mechanical Engineering</a></h3>
+                    <span class="detail-date">Aug 2025 - now</span>
+                    <p>George R. Brown School of Engineering | Rice University</p>
+                    <ul><li>GPA: 3.84 / 4.0</li><li>Martel College</li></ul>
+                </div>
+                <div class="edu-block">
+                    <h3><a href="https://www.rtu.lv/en" target="_blank">Riga Technical University Engineering High School</a></h3>
+                    <span class="detail-date">Sep 2022 - Jul 2025</span>
+                    <ul>
+                        <li>GPA: 9.93 / 10 | Class rank: 1st</li>
+                        <li>Student government & event host, tutor, astronomy olympiad, engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONTACT STATE ===== -->
+    <div class="state state--section" id="state-contact">
+        <img src="./assets/images/fly.jpg" alt="" class="contact-bg">
+        <div class="section-scroll section-scroll--center">
+            <div class="contact-content">
+                <h2>Lets !</h2>
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/mvzpjegv" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message →</button>
+                </form>
+                <div class="contact-socials">
+                    <a href="https://www.linkedin.com/in/j%C4%81nis-stendzenieks-751409359/" target="_blank">LinkedIn ↗</a>
+                    <a href="https://www.instagram.com/janis_ste/" target="_blank">Instagram ↗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="image-lightbox" class="lightbox">
+        <div class="lightbox-close">&times;</div>
+        <div class="lightbox-prev">&#8249;</div>
+        <div class="lightbox-next">&#8250;</div>
+        <div class="lightbox-counter"></div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+    </div>
+
+    <!-- PDF Lightbox -->
+    <div id="pdf-lightbox">
+        <div id="pdf-lightbox-close">&times;</div>
+        <div id="pdf-lightbox-inner">
+            <iframe id="pdf-lightbox-iframe" title="Research Paper"></iframe>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="./scripts/app.js"></script>
+    <script>
+        (function() {
+            var PDF_SRC = './assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf';
+            var lightbox = document.getElementById('pdf-lightbox');
+            var lbIframe = document.getElementById('pdf-lightbox-iframe');
+            var lbClose  = document.getElementById('pdf-lightbox-close');
+            var expandBtn = document.getElementById('pdf-expand-btn');
+
+            function openPdfLightbox() {
+                lbIframe.src = PDF_SRC;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closePdfLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(function() { lbIframe.src = ''; }, 300);
+            }
+
+            if (expandBtn) expandBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openPdfLightbox();
+            });
+
+            if (lbClose) lbClose.addEventListener('click', closePdfLightbox);
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) closePdfLightbox();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closePdfLightbox();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
