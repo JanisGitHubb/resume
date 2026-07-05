@@ -972,4 +972,9 @@ ul { list-style: none; }
     .form-row { flex-direction: column; }
     .submit-btn { width: 100%; text-align: center; }
     .contact-socials { gap: 16px; margin-top: 20px; }
+
+    /* ── Optical memory heading — no glow, smaller ── */
+    #project-opticalmemory h2 { font-size: 1.2rem; }
+    .project-detail h2,
+    .project-detail > .detail-date { text-shadow: none; }
 }
