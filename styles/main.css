@@ -870,88 +870,106 @@ ul { list-style: none; }
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
 
+    /* ── Global link colour fix — stop iOS blue ── */
+    a { color: inherit; }
+    .detail-panel h2 a,
+    .project-detail h2 a { color: inherit; text-decoration: underline; }
+    .detail-panel h2 a:hover,
+    .project-detail h2 a:hover { color: #444; }
+
     /* ── Home ── */
-    .home-content { left: 24px; bottom: 110px; }
-    .home-name { font-size: 3.2rem; letter-spacing: -2px; }
-    .home-sub { font-size: 0.95rem; margin-top: 12px; }
-    .home-nav { left: 24px; bottom: 28px; gap: 20px; flex-wrap: wrap; }
-    .home-nav a { font-size: 1rem; }
+    .home-content { left: 20px; bottom: 100px; right: 20px; }
+    .home-name { font-size: 2.8rem; letter-spacing: -2px; }
+    .home-sub { font-size: 0.9rem; margin-top: 10px; }
+    .home-nav { left: 20px; bottom: 24px; gap: 16px; flex-wrap: wrap; }
+    .home-nav a { font-size: 0.95rem; }
     .home-label { display: none; }
 
-    /* ── Top nav ── */
-    .top-nav { padding: 0 16px; height: 52px; }
-    .top-nav-back { font-size: 1.1rem; }
-    .top-nav-links { gap: 12px; }
-    .top-nav-links a { font-size: 0.8rem; }
-    .state--section { top: 52px; }
+    /* ── Top nav — fix cramping ── */
+    .top-nav { padding: 0 12px; height: 50px; gap: 8px; }
+    .top-nav-back { font-size: 0.95rem; font-weight: 700; letter-spacing: 0; white-space: nowrap; }
+    .top-nav-links { gap: 10px; flex-shrink: 1; min-width: 0; }
+    .top-nav-links a { font-size: 0.75rem; white-space: nowrap; }
+    .state--section { top: 50px; }
 
     /* ── Section scroll ── */
-    .section-scroll { padding: 24px 16px 80px; }
-    .section-scroll--center { padding: 24px 16px 60px; min-height: calc(100vh - 52px); }
+    .section-scroll { padding: 20px 14px 80px; }
+    .section-scroll--center { padding: 20px 14px 60px; min-height: calc(100vh - 50px); }
 
-    /* ── Experience logo stage ── */
-    .logo-stage { gap: 16px; padding: 0 0px; min-height: auto; padding-bottom: 32px; }
-    .logo-item { padding: 28px 24px; }
-    .logo-item .exp-meta { font-size: 0.8rem; text-align: center; }
+    /* ── Experience logo stage — logos too big ── */
+    .logo-stage { gap: 14px; padding: 16px 0 32px; min-height: auto; }
+    .logo-item { padding: 22px 16px; gap: 10px; }
+    .logo-item img { height: 36px !important; max-width: 80%; object-fit: contain; }
+    .logo-item img[alt="Rice Eclipse"] { height: 60px !important; top: 0; left: 0; }
+    .logo-item .exp-meta { font-size: 0.78rem; text-align: center; }
 
     /* ── Detail panels ── */
-    .detail-panel h2 { font-size: 1.5rem; }
-    .detail-back { margin-bottom: 20px; }
+    .detail-panel h2 { font-size: 1.4rem; word-break: break-word; }
+    .detail-back { margin-bottom: 16px; padding: 6px 14px; font-size: 0.85rem; }
 
     /* ── Detail role cards ── */
-    .detail-role { padding: 20px 18px; }
-    .detail-role h3 { font-size: 1rem; }
+    .detail-role { padding: 16px 14px; margin-top: 16px; }
+    .detail-role h3 { font-size: 0.95rem; }
+    .detail-role p { font-size: 0.9rem; }
+    .detail-role li { font-size: 0.9rem; }
 
-    /* Float images below text on mobile instead of beside */
+    /* ── Un-float all media — poster, images, 3D models ── */
     .detail-role-media {
-        float: none;
-        width: 100%;
-        max-width: 100%;
-        margin: 12px 0 12px 0;
+        float: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 14px 0 !important;
+        display: block;
     }
     .detail-role-media--model {
-        height: 200px;
-        width: 100%;
+        height: 180px !important;
+        width: 100% !important;
+        border: none !important;
+    }
+    .detail-role-media--model canvas {
+        width: 100% !important;
+        height: 100% !important;
     }
 
     /* ── Project cards ── */
-    .project-cards { gap: 16px; padding: 24px 0; }
-    .project-card { padding: 20px; flex-direction: column; align-items: flex-start; }
-    .project-card h3 { font-size: 1.1rem; }
-    .project-card .project-meta { margin-left: 0; margin-top: 6px; white-space: normal; }
+    .project-cards { gap: 12px; padding: 20px 0; }
+    .project-card { padding: 18px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .project-card h3 { font-size: 1rem; }
+    .project-card .project-meta { margin-left: 0; margin-top: 4px; white-space: normal; font-size: 0.8rem; }
 
     /* ── Project detail ── */
-    .project-detail h2 { font-size: 1.5rem; }
-    .project-detail-spacer { height: 12vh; min-height: 60px; }
+    .project-detail h2 { font-size: 1.4rem; }
+    .project-detail-spacer { height: 10vh; min-height: 50px; }
     #project-modelling .project-detail-spacer { height: 4vh; min-height: 20px; }
     .project-detail-controls { flex-wrap: wrap; }
 
-    /* ── Side-by-side pair → stack on mobile ── */
+    /* ── Side-by-side pair → stack ── */
     .detail-role-pair { flex-direction: column; gap: 0; }
     .detail-role-pair .detail-role { margin-top: 16px; }
 
     /* ── Video thumbnails ── */
-    .video-pair { gap: 10px; }
-    .video-thumb-card { width: calc(50% - 5px); }
+    .video-pair { gap: 8px; }
+    .video-thumb-card { width: calc(50% - 4px); }
 
     /* ── Gallery preview ── */
     .detail-gallery-preview { width: 100%; }
 
     /* ── RTU institution logo ── */
-    .project-detail-institution-logo { height: 14vh; min-height: 80px; }
-    .institution-logo { width: clamp(200px, 80%, 340px); }
+    .project-detail-institution-logo { height: 12vh; min-height: 70px; }
+    .institution-logo { width: clamp(160px, 75%, 280px); }
 
     /* ── PDF embed ── */
-    .pdf-embed-frame-wrap { height: 340px; }
+    .pdf-embed-frame-wrap { height: 320px; }
 
     /* ── Education ── */
-    .edu-content { gap: 16px; }
-    .edu-block { padding: 24px 20px; }
-    .edu-block h3 { font-size: 1rem; }
+    .edu-content { gap: 14px; }
+    .edu-block { padding: 20px 16px; }
+    .edu-block h3 { font-size: 0.95rem; }
 
     /* ── Contact ── */
-    .contact-content { padding: 28px 20px; }
-    .contact-content h2 { font-size: 1.8rem; margin-bottom: 24px; }
+    .contact-content { padding: 24px 16px; }
+    .contact-content h2 { font-size: 1.6rem; margin-bottom: 20px; }
     .form-row { flex-direction: column; }
-    .contact-socials { gap: 16px; margin-top: 24px; }
+    .submit-btn { width: 100%; text-align: center; }
+    .contact-socials { gap: 16px; margin-top: 20px; }
 }
