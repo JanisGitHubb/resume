@@ -776,10 +776,8 @@ ul { list-style: none; }
 }
 
 .edu-block h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
-.edu-block h3 a { color: var(--accent); text-decoration: underline; }
-.edu-block h3 a:hover { text-decoration: underline; color: #444; }
-.detail-panel h2 a, .project-detail h2 a { color: inherit; text-decoration: underline; }
-.detail-panel h2 a:hover, .project-detail h2 a:hover { text-decoration: underline; color: #444; }
+.edu-block h3 a { color: var(--accent); text-decoration: none; }
+.edu-block h3 a:hover { text-decoration: underline; }
 .edu-block .detail-date { display: block; font-size: 0.9rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 10px; }
 .edu-block p { color: var(--text-secondary); margin-bottom: 10px; }
 .edu-block ul { list-style: disc; padding-left: 20px; }
@@ -871,15 +869,89 @@ ul { list-style: none; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .home-content { left: 24px; bottom: 100px; }
-    .home-name { font-size: 3rem; letter-spacing: -1.5px; }
-    .home-nav { left: 24px; bottom: 24px; gap: 20px; flex-wrap: wrap; }
+
+    /* ── Home ── */
+    .home-content { left: 24px; bottom: 110px; }
+    .home-name { font-size: 3.2rem; letter-spacing: -2px; }
+    .home-sub { font-size: 0.95rem; margin-top: 12px; }
+    .home-nav { left: 24px; bottom: 28px; gap: 20px; flex-wrap: wrap; }
     .home-nav a { font-size: 1rem; }
     .home-label { display: none; }
-    .portrait { height: 50vh; right: -5%; }
-    .top-nav { padding: 0 24px; }
-    .section-scroll { padding: 40px 24px 80px; }
+
+    /* ── Top nav ── */
+    .top-nav { padding: 0 16px; height: 52px; }
+    .top-nav-back { font-size: 1.1rem; }
+    .top-nav-links { gap: 12px; }
+    .top-nav-links a { font-size: 0.8rem; }
+    .state--section { top: 52px; }
+
+    /* ── Section scroll ── */
+    .section-scroll { padding: 24px 16px 80px; }
+    .section-scroll--center { padding: 24px 16px 60px; min-height: calc(100vh - 52px); }
+
+    /* ── Experience logo stage ── */
+    .logo-stage { gap: 16px; padding: 0 0px; min-height: auto; padding-bottom: 32px; }
+    .logo-item { padding: 28px 24px; }
+    .logo-item .exp-meta { font-size: 0.8rem; text-align: center; }
+
+    /* ── Detail panels ── */
+    .detail-panel h2 { font-size: 1.5rem; }
+    .detail-back { margin-bottom: 20px; }
+
+    /* ── Detail role cards ── */
+    .detail-role { padding: 20px 18px; }
+    .detail-role h3 { font-size: 1rem; }
+
+    /* Float images below text on mobile instead of beside */
+    .detail-role-media {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 12px 0 12px 0;
+    }
+    .detail-role-media--model {
+        height: 200px;
+        width: 100%;
+    }
+
+    /* ── Project cards ── */
+    .project-cards { gap: 16px; padding: 24px 0; }
+    .project-card { padding: 20px; flex-direction: column; align-items: flex-start; }
+    .project-card h3 { font-size: 1.1rem; }
+    .project-card .project-meta { margin-left: 0; margin-top: 6px; white-space: normal; }
+
+    /* ── Project detail ── */
+    .project-detail h2 { font-size: 1.5rem; }
+    .project-detail-spacer { height: 12vh; min-height: 60px; }
+    #project-modelling .project-detail-spacer { height: 4vh; min-height: 20px; }
+    .project-detail-controls { flex-wrap: wrap; }
+
+    /* ── Side-by-side pair → stack on mobile ── */
+    .detail-role-pair { flex-direction: column; gap: 0; }
+    .detail-role-pair .detail-role { margin-top: 16px; }
+
+    /* ── Video thumbnails ── */
+    .video-pair { gap: 10px; }
+    .video-thumb-card { width: calc(50% - 5px); }
+
+    /* ── Gallery preview ── */
+    .detail-gallery-preview { width: 100%; }
+
+    /* ── RTU institution logo ── */
+    .project-detail-institution-logo { height: 14vh; min-height: 80px; }
+    .institution-logo { width: clamp(200px, 80%, 340px); }
+
+    /* ── PDF embed ── */
+    .pdf-embed-frame-wrap { height: 340px; }
+
+    /* ── Education ── */
+    .edu-content { gap: 16px; }
+    .edu-block { padding: 24px 20px; }
+    .edu-block h3 { font-size: 1rem; }
+
+    /* ── Contact ── */
+    .contact-content { padding: 28px 20px; }
+    .contact-content h2 { font-size: 1.8rem; margin-bottom: 24px; }
     .form-row { flex-direction: column; }
-    .top-nav-links { gap: 16px; }
-    .top-nav-links a { font-size: 0.85rem; }
+    .contact-socials { gap: 16px; margin-top: 24px; }
 }
