@@ -89,6 +89,29 @@
             background: rgba(26,26,26,0.92);
         }
 
+        /* Mobile PDF link — hidden on desktop */
+        .pdf-mobile-link {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            /* Hide iframe embed on mobile — iOS can't scroll it */
+            .pdf-embed-frame-wrap {
+                display: none;
+            }
+            /* Show tap-to-open link instead */
+            .pdf-mobile-link {
+                display: block;
+                padding: 16px;
+                text-align: center;
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: var(--text);
+                text-decoration: underline;
+                background: var(--surface, #F5F0EB);
+            }
+        }
+
         /* ── PDF Lightbox ── */
         #pdf-lightbox {
             position: fixed;
@@ -188,7 +211,7 @@
 
             <div class="detail-panel" id="detail-timtec">
                 <button class="detail-back">← Back</button>
-                <h2><a href="https://www.timtec.eu/" target="_blank">TIMTEC</a></h2>
+                <h2>TIMTEC</h2>
                 <span class="detail-date">Vipava, Slovenia | Apr - Jun 2026</span>
                 <div class="detail-role">
                     <h3>Mechanical Engineering Intern</h3>
@@ -204,7 +227,7 @@
 
             <div class="detail-panel" id="detail-eclipse">
                 <button class="detail-back">← Back</button>
-                <h2><a href="https://eclipse.rice.edu/" target="_blank">Rice Eclipse Rocketry</a></h2>
+                <h2>Rice Eclipse Rocketry</h2>
                 <span class="detail-date">Houston TX | Oct 2025 - now</span>
                 <div class="detail-role">
                     <h3>Lead Engineer - Eclipse Sander</h3>
@@ -343,7 +366,7 @@
                 <div class="project-detail-institution-logo">
                     <img src="./assets/images/rtu-logo.png" alt="Riga Technical University" class="institution-logo">
                 </div>
-                <h2><a href="https://www.rtu.lv/en" target="_blank">Optical Memory Research</a></h2>
+                <h2>Optical Memory Research</h2>
                 <span class="detail-date">RTU Engineering High School | May 2023 - May 2024</span>
                 <div class="detail-role">
                     <h3>Student Research Intern</h3>
@@ -366,6 +389,9 @@
                                 <span>⤢ Expand</span>
                             </div>
                         </div>
+                        <a class="pdf-mobile-link" href="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf" target="_blank">
+                            Open full paper
+                        </a>
                     </div>
                 </div>
             </div>
@@ -401,7 +427,7 @@
                     <h3>Fashion Model</h3>
                     <p>Fashion model at BroModel agency</p>
                     <ul>
-                        <li><a href="https://thebromodels.com/new/janis" target="_blank" class="inline-link">View portfolio</a></li>
+                        <li><a href="https://thebromodels.com/new/janis" target="_blank" class="inline-link">View portfolio ↗</a></li>
                         <li>Participated in Milano Fashion Week 2024. Had photoshoots and interacted with various fashion houses (PRADA, FENDI, ZEGNA, etc)</li>
                         <li>Volunteered for various local fashion designers supporting sustainable fashion</li>
                     </ul>
@@ -419,7 +445,7 @@
                     <ul><li>GPA: 3.84 / 4.0</li><li>Martel College</li></ul>
                 </div>
                 <div class="edu-block">
-                    <h3><a href="https://www.rtu.lv/en" target="_blank">Riga Technical University Engineering High School</a></h3>
+                    <h3><a href="https://izv.lv/#top" target="_blank">Riga Technical University Engineering High School</a></h3>
                     <span class="detail-date">Sep 2022 - Jul 2025</span>
                     <ul>
                         <li>GPA: 9.93 / 10 | Class rank: 1st</li>
@@ -435,7 +461,7 @@
         <img src="./assets/images/fly.jpg" alt="" class="contact-bg">
         <div class="section-scroll section-scroll--center">
             <div class="contact-content">
-                <h2>Lets chat!</h2>
+                <h2>Lets !</h2>
                 <form id="contact-form" class="contact-form" action="https://formspree.io/f/mvzpjegv" method="POST">
                     <div class="form-row">
                         <div class="form-group">
@@ -454,8 +480,8 @@
                     <button type="submit" class="submit-btn">Send Message →</button>
                 </form>
                 <div class="contact-socials">
-                    <a href="https://www.linkedin.com/in/j%C4%81nis-stendzenieks-751409359/" target="_blank">LinkedIn</a>
-                    <a href="https://www.instagram.com/janis_ste/" target="_blank">Instagram</a>
+                    <a href="https://www.linkedin.com/in/j%C4%81nis-stendzenieks-751409359/" target="_blank">LinkedIn ↗</a>
+                    <a href="https://www.instagram.com/janis_ste/" target="_blank">Instagram ↗</a>
                 </div>
             </div>
         </div>
