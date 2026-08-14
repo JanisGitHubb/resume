@@ -802,19 +802,42 @@
     }
 
     // === INLINE MODEL VIEWERS ===
+    // NOTE: fixed to size off the container's *actual* current box (via
+    // ResizeObserver) instead of a one-shot snapshot at call time. Several
+    // of these canvases (e.g. the antenna clamp) live inside panels that are
+    // still `display:none` at DOMContentLoaded, so `parent.clientWidth /
+    // clientHeight` used to read 0 and the renderer fell back to defaults —
+    // while the CSS (`width:100%!important; height:100%!important;`) then
+    // stretched that mis-sized canvas to fit its real box, squashing the
+    // model (most noticeable on the short, wide mobile layout).
     function setupInlineModel(canvasId, stlPath, camZ, initRotY) {
         var canvas = document.getElementById(canvasId);
         if (!canvas) return;
         var parent = canvas.parentElement;
-        var w = parent.clientWidth || 240;
-        var h = parent.clientHeight || 200;
+
         var sc = new THREE.Scene();
-        var cam = new THREE.PerspectiveCamera(45, w / h, 1, 5000);
+        var cam = new THREE.PerspectiveCamera(45, 1, 1, 5000);
         cam.position.set(0, 0, camZ);
         var ren = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         ren.setClearColor(0x000000, 0);
-        ren.setSize(w, h);
-        ren.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        function syncSize() {
+            var w = parent.clientWidth;
+            var h = parent.clientHeight;
+            if (!w || !h) return; // panel still hidden — nothing to size yet
+            cam.aspect = w / h;
+            cam.updateProjectionMatrix();
+            ren.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            ren.setSize(w, h, false);
+        }
+
+        syncSize();
+        if (window.ResizeObserver) {
+            new ResizeObserver(syncSize).observe(parent);
+        } else {
+            window.addEventListener('resize', syncSize);
+        }
+
         sc.add(new THREE.AmbientLight(0xffffff, 0.35));
         var dl1 = new THREE.DirectionalLight(0xffffff, 0.9); dl1.position.set(2, 3, 2); sc.add(dl1);
         var dl2 = new THREE.DirectionalLight(0xffffff, 0.3); dl2.position.set(-2, -1, -2); sc.add(dl2);
@@ -825,6 +848,9 @@
             mesh.rotation.x = Math.PI;
             mesh.rotation.y = initRotY || 0;
             sc.add(mesh);
+            // Re-check size once the model is in — in case the panel opened
+            // between call time and load completing.
+            syncSize();
             var drag = false, prev = { x: 0, y: 0 };
             canvas.addEventListener('mousedown', function(e) {
                 drag = true; prev = { x: e.clientX, y: e.clientY };
