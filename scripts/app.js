@@ -756,7 +756,7 @@
                 canvas.style.cursor = 'grab';
             } else if (projectId === 'opticalmemory') {
                 ['phoneCase', 'tricycle'].forEach(function(key) { scatterModel(key); });
-            } else if (projectId === 'modelling') {
+            } else if (projectId === 'ethicspaper') {
                 ['phoneCase', 'tricycle'].forEach(function(key) { scatterModel(key); });
             }
 
