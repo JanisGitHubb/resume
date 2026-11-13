@@ -761,6 +761,78 @@ ul { list-style: none; }
     border: 2px solid var(--bg);
 }
 
+/* ===== POV FOOTAGE (Instagram profile) ===== */
+.pov-footage {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.pov-insta {
+    width: 100%;
+    max-width: 540px;   /* the widest Instagram's preview goes */
+}
+
+.pov-insta-frame { position: relative; }
+
+/* once Instagram's preview has loaded, frame it like the rest of the site */
+.pov-insta-frame:has(iframe) {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.pov-insta iframe.instagram-media {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+/* our own footer link, laid over the blank strip at the bottom of the preview */
+.pov-insta-foot { display: none; }
+
+.pov-insta-frame:has(iframe) .pov-insta-foot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 48px;
+    background: #fff;
+    border-top: 1px solid #efefef;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* what shows until (or unless) Instagram's preview loads */
+.pov-insta .pov-insta-link {
+    display: inline-block;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: border-color 0.2s;
+}
+
+.pov-insta .pov-insta-link:hover {
+    border-color: var(--text);
+    text-decoration: none;
+}
+
+/* ===== TENDON HAND PROJECT ===== */
+#project-hand .project-detail-spacer {
+    height: 34vh;
+    min-height: 200px;
+}
+
 /* ===== EDUCATION ===== */
 .edu-content {
     display: flex;
@@ -945,6 +1017,10 @@ ul { list-style: none; }
 
     /* ── Gallery preview ── */
     .detail-gallery-preview { width: 100%; }
+
+    /* ── Tendon hand ── */
+    #project-hand .project-detail-spacer { height: 22vh; min-height: 130px; }
+    #project-hand .explode-range { max-width: 84px; }
 
     /* ── RTU institution logo ── */
     .project-detail-institution-logo { height: 14vh; min-height: 80px; }
