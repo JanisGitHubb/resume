@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEESYE5RKE"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-GEESYE5RKE');    
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jānis Stendzenieks</title>
@@ -248,8 +240,8 @@
                 <button class="detail-back">← Back</button>
                 <h2>Rice Eclipse Rocketry</h2>
                 <span class="detail-date">Houston TX | Oct 2025 - now</span>
-
-                 <div class="detail-role">
+                
+                <div class="detail-role">
                     <h3>Active Flight Stabilization Engineer</h3>
                     <p>R&amp;D - fin control surfaces for future rockets</p>
                     <p style="color: black; font-style: normal; margin-left: 0; padding-left: 0;">Working on active flight stabilization using rocket fins as control surfaces. Fin and control mechanism design with servo integration, PID controller electronics.</p>
@@ -309,8 +301,12 @@
     <div class="state state--section" id="state-projects">
         <div class="section-scroll section-scroll--center">
             <div class="project-cards" id="project-cards">
+                <div class="project-card" data-project="hand">
+                    <h3>Tendon-Driven Hand</h3>
+                    <span class="project-meta">Houston TX, USA | Oct - Nov 2026</span>
+                </div>
                 <div class="project-card" data-project="povcase">
-                    <h3>POV Phonecase</h3>
+                    <h3>POV phonecase</h3>
                     <span class="project-meta">Houston TX, USA | Nov 2025 - now</span>
                 </div>
                 <div class="project-card" data-project="tricycle">
@@ -327,11 +323,34 @@
                 </div>
             </div>
 
+            <!-- Tendon-Driven Hand Detail -->
+            <div class="project-detail" id="project-hand">
+                <button class="detail-back project-back">← Back</button>
+                <div class="project-detail-spacer"></div>
+                <h2>Tendon-Driven Hand</h2>
+                <span class="detail-date">Personal Project | Oct - Nov 2026</span>
+                <div class="project-detail-controls">
+                    <label for="hand-explode-range">Explode View</label>
+                    <input type="range" id="hand-explode-range" min="0" max="100" value="0" class="explode-range">
+                    <label for="hand-grip-range">Grip</label>
+                    <input type="range" id="hand-grip-range" min="0" max="100" value="0" class="explode-range">
+                </div>
+                <div class="detail-role">
+                    <h3>Body-Powered Hand Extension</h3>
+                    <p>A 41 cm mechanical hand that copies my own fingers through strings</p>
+                    <ul>
+                        <li>Built for fun to learn how tendon-driven mechanisms work: curling one of my fingers pulls a string that curls the matching mechanical finger, and rubber bands on the back of each joint spring it open again</li>
+                        <li>Designed 14 moving finger links on 14 hinge joints - four 3-segment fingers on a shared knuckle rod plus a 2-segment thumb - with fingers more than twice human length and string channels built into the palm</li>
+                        <li>CAD design in Fusion 360, 3D printing, string tendons, rubber-band return springs, nylon webbing strap and finger loops</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- POV Case Detail -->
             <div class="project-detail" id="project-povcase">
                 <button class="detail-back project-back">← Back</button>
                 <div class="project-detail-spacer"></div>
-                <h2>POV Phonecase</h2>
+                <h2>iPhone POV Case</h2>
                 <span class="detail-date">Personal Project | Nov 2025 - now</span>
                 <div class="project-detail-controls">
                     <label for="explode-range">Explode View</label>
@@ -346,35 +365,25 @@
                         <li>3D printed case + chestplate, elastic straps</li>
                     </ul>
                 </div>
-                <div class="detail-role-pair">
-                    <div class="detail-role">
-                        <h3>Regular Mount</h3>
-                        <p>First prototype iteration</p>
-                        <div class="detail-role-media detail-role-media--model">
-                            <canvas id="v1-mount-canvas"></canvas>
-                        </div>
-                        <ul>
-                            <li>Rigid 3D printed phone holder designed around iPhone 14 dimensions</li>
-                            <li>Nylon webbing chest harness</li>
-                        </ul>
+                <div class="detail-role">
+                    <h3>Regular Mount</h3>
+                    <p>First prototype iteration</p>
+                    <div class="detail-role-media detail-role-media--model">
+                        <canvas id="v1-mount-canvas"></canvas>
                     </div>
-                    <div class="detail-role detail-role--videos">
-                        <h3>Test Footage</h3>
-                        <div class="video-pair">
-                            <a class="video-thumb-card" href="https://www.youtube.com/watch?v=AhAVe5XNYBc" target="_blank">
-                                <img src="./assets/images/thumbnail1.png" alt="Basketball test">
-                                <div class="video-thumb-overlay">
-                                    <span>▶ Watch on YouTube</span>
-                                </div>
-                                <span class="video-label">Basketball test (V2)</span>
-                            </a>
-                            <a class="video-thumb-card" href="https://www.youtube.com/watch?v=8xQzvJ3mD8w" target="_blank">
-                                <img src="./assets/images/thumbnail2.png" alt="Skiing test">
-                                <div class="video-thumb-overlay">
-                                    <span>▶ Watch on YouTube</span>
-                                </div>
-                                <span class="video-label">Skiing test (V1)</span>
-                            </a>
+                    <ul>
+                        <li>Rigid 3D printed phone holder designed around iPhone 14 dimensions</li>
+                        <li>Nylon webbing chest harness</li>
+                    </ul>
+                </div>
+                <div class="pov-footage">
+                    <div class="pov-insta">
+                        <div class="pov-insta-frame">
+                            <!-- Instagram's embed script swaps this for a live preview of the profile and its latest reels -->
+                            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/janisbuildsstuff/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+                                <a class="pov-insta-link" href="https://www.instagram.com/janisbuildsstuff/" target="_blank" rel="noopener">View @janisbuildsstuff on Instagram →</a>
+                            </blockquote>
+                            <a class="pov-insta-foot" href="https://www.instagram.com/janisbuildsstuff/" target="_blank" rel="noopener">View profile on Instagram →</a>
                         </div>
                     </div>
                 </div>
@@ -426,7 +435,7 @@
                     <h3>Philosophical Analysis Paper</h3>
                     <p>Challenging the Utilitarian Test for Moral Status</p>
                 
-                        <p style="color: black; font-style: normal; margin-left: 0; padding-left: 0;">This is a philosophical analysis essay challenging the Argument from Marginal Cases - a widely discussed perspective in moral philosophy. I just find it very interesting, so here's my take on it.</p>
+                        <p style="color: black; font-style: normal; margin-left: 0; padding-left: 0;">This is a philosophical analysis essay challenging the Argument from Marginal Cases - a widely discussed perspective in moral philosophy. Here's my take on it.</p>
                     <div class="pdf-embed-block" id="pdf-embed-ethics">
                         <div class="pdf-embed-title">Is Suffering Enough? Challenging the Utilitarian Test for Moral Status</div>
                         <div class="pdf-embed-frame-wrap" id="pdf-frame-wrap-ethics">
@@ -457,7 +466,7 @@
                     <h3>Lead Mechanical Engineer</h3>
                     <p>Led a team of students to design and manufacture 4 energy-efficient electric tricycles from recycled materials</p>
                     <ul>
-                        <li>Fully designed and manufactured 4 electric tricycles from recycled materials</li>
+                        <li>Fully designed and manufactured 2 electric tricycles from recycled materials, assisted with 2 other e-tricycle builds</li>
                         <li>Public showcase drive at the 2025 Latvian Song and Dance Festival: 90,000+ attendees, broadcast live on national television (~1.5 million viewers)</li>
                         <li>Steering mechanism & part design/machining, frame welding, controller electronics & hydraulic brake system setup, soldering</li>
                     </ul>
@@ -543,6 +552,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="./scripts/hand.js"></script>
     <script src="./scripts/app.js"></script>
     <script>
         (function() {
