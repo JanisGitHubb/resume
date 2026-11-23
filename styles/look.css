@@ -1,0 +1,24 @@
+/* ===== LOOK: light cream page, black type, orange models =====
+   Soft neutral glows give the page depth; the landing is a full-width panel whose
+   bottom edge curves into the page with a soft shadow (no frame at the top). */
+body {
+    background:
+        radial-gradient(55% 14% at 92% 4%,   rgba(255, 252, 247, 0.9), transparent 70%),
+        radial-gradient(50% 16% at 0% 26%,   rgba(222, 213, 201, 0.55), transparent 72%),
+        radial-gradient(45% 14% at 100% 48%, rgba(255, 252, 247, 0.7), transparent 70%),
+        radial-gradient(55% 16% at 6% 70%,   rgba(225, 217, 206, 0.5), transparent 72%),
+        radial-gradient(60% 16% at 90% 94%,  rgba(220, 211, 199, 0.55), transparent 72%),
+        var(--bg);
+}
+body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2;
+    background: radial-gradient(120% 90% at 50% 50%, transparent 62%, rgba(90, 75, 60, 0.08) 100%);
+}
+.hero {
+    border-radius: 0 0 32px 32px;
+    background:
+        radial-gradient(40% 50% at 76% 26%, rgba(255, 253, 249, 0.95), transparent 70%),
+        radial-gradient(95% 90% at 82% 12%, #efe8df 0%, #e7dfd4 42%, #ece5dc 70%, #f2ede7 100%);
+    box-shadow: 0 1px 0 rgba(60, 45, 30, 0.06), 0 28px 60px -34px rgba(60, 45, 30, 0.28);
+}
+@media (max-width: 768px) { .hero { border-radius: 0 0 22px 22px; } }
