@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEESYE5RKE"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GEESYE5RKE');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jānis Stendzenieks</title>
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/main.css?v=1795406946">
+    <link rel="stylesheet" href="./styles/site.css?v=1795406946">
+    <link rel="stylesheet" href="./styles/look.css?v=1795406946">
     <style>
         /* RTU logo sits inside the spacer zone at the top of the optical memory detail */
         #project-opticalmemory {
@@ -158,61 +168,296 @@
     </style>
 </head>
 <body>
+    <canvas id="scene"></canvas>
 
-    <!-- Background image -->
-    <img src="./assets/images/cover.jpg" alt="" class="home-bg" id="home-bg">
-
-    <!-- Persistent 3D canvas -->
-    <canvas id="scene-canvas"></canvas>
-
-    <!-- ===== HOME STATE ===== -->
-    <div class="state state--home active" id="state-home">
-        <div class="home-content">
-            <h1 class="home-name">Jānis<br>Stendzenieks</h1>
-            <p class="home-sub">Mechanical Engineering at Rice University</p>
-        </div>
-        <nav class="home-nav">
-            <a href="#" data-section="experience">Experience</a>
-            <a href="#" data-section="projects">Projects</a>
-            <a href="#" data-section="education">Education</a>
-            <a href="#" data-section="contact">Contact</a>
-        </nav>
-        <span class="home-label">Houston TX / Riga LV</span>
-    </div>
-
-    <!-- ===== TOP NAV (subpages) ===== -->
-    <nav class="top-nav" id="top-nav">
-        <a href="#" class="top-nav-back" data-section="home">Home</a>
-        <div class="top-nav-links">
-            <a href="#" data-section="experience">Experience</a>
-            <a href="#" data-section="projects">Projects</a>
-            <a href="#" data-section="education">Education</a>
-            <a href="#" data-section="contact">Contact</a>
+    <nav class="bar">
+        <a href="#" class="bar-home" data-goto="top">Jānis Stendzenieks</a>
+        <div class="bar-links">
+            <a href="#" data-goto="projects">Projects</a>
+            <a href="#" data-goto="experience">Experience</a>
+            <a href="#" data-goto="education">Education</a>
+            <a href="#" data-goto="contact">Contact</a>
         </div>
     </nav>
 
-    <!-- ===== EXPERIENCE STATE ===== -->
-    <div class="state state--section" id="state-experience">
-        <div class="section-scroll">
-            <div class="logo-stage" id="exp-logos">
-                <div class="logo-item logo-item--wide-gap" data-detail="timtec">
-                    <img src="./assets/images/timtec-logo.png" alt="TIMTEC">
-                    <span class="exp-meta">Vipava, Slovenia | Apr - Jun 2026</span>
+    <main id="page">
+        <!-- ===== LANDING: name + models ===== -->
+        <header class="hero" id="top">
+            <span class="hero-kicker">Mechanical Engineering at Rice University</span>
+            <span class="hero-place">Houston TX / Riga LV</span>
+            <div class="hero-belt" id="belt"></div>
+            <h1 class="hero-name">Jānis<br>Stendzenieks</h1>
+            <span class="hero-scroll">Scroll ↓</span>
+        </header>
+
+        <!-- ===== PROJECTS ===== -->
+        <section class="sec" id="projects">
+            <div class="sec-head"><span>01</span><h2>Projects</h2></div>
+            <div class="tiles">
+                <a class="tile" href="#" data-open="hand">
+                    <div class="tile-stage" data-model="hand" data-size=".92" data-rot="8 0 6" data-spin=".5"></div>
+                    <h3>Tendon-Driven Hand</h3>
+                    <div class="tile-meta"><span>Houston TX, USA</span><b>Oct - Nov 2026</b></div>
+                </a>
+                <a class="tile" href="#" data-open="povcase">
+                    <div class="tile-stage" data-model="phone" data-size=".58" data-rot="0 0 0" data-spin="-.45"></div>
+                    <h3>POV phonecase</h3>
+                    <div class="tile-meta"><span>Houston TX, USA</span><b>Nov 2025 - now</b></div>
+                </a>
+                <a class="tile" href="#" data-open="tricycle">
+                    <div class="tile-stage" data-model="tricycle" data-size=".95" data-rot="0 0 0" data-spin=".35"></div>
+                    <h3>Electric Tricycle</h3>
+                    <div class="tile-meta"><span>Riga, Latvia</span><b>Oct 2024 - Jul 2025</b></div>
+                </a>
+            </div>
+            <div class="tiles tiles--text">
+                <a class="tile" href="#" data-open="opticalmemory">
+                    <h3>Optical Material Research</h3>
+                    <div class="tile-meta"><span>Riga, Latvia</span><b>May 2023 - May 2024</b></div>
+                </a>
+                <a class="tile" href="#" data-open="ethicspaper">
+                    <h3>Is Suffering Enough? (Philosophy Paper)</h3>
+                    <div class="tile-meta"><span>Rice University</span><b>Fall 2025</b></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== EXPERIENCE ===== -->
+        <section class="sec" id="experience">
+            <div class="sec-head"><span>02</span><h2>Experience</h2></div>
+            <div class="tiles">
+                <a class="tile tile--logo" href="#" data-open="timtec">
+                    <div class="tile-stage"><img src="./assets/images/timtec-logo.png" alt="TIMTEC"></div>
+                    <div class="tile-meta"><span>Vipava, Slovenia</span><b>Apr - Jun 2026</b></div>
+                </a>
+                <a class="tile tile--logo" href="#" data-open="eclipse">
+                    <div class="tile-stage"><img src="./assets/images/eclipse-logo.png" alt="Rice Eclipse" class="tall"></div>
+                    <div class="tile-meta"><span>Houston TX, USA</span><b>Oct 2025 - now</b></div>
+                </a>
+                <a class="tile tile--logo" href="#" data-open="tarragon">
+                    <div class="tile-stage"><img src="./assets/images/tarragon-logo.svg" alt="Tarragon Aircraft" class="dark"></div>
+                    <div class="tile-meta"><span>Riga, Latvia</span><b>Jun - Aug 2025</b></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== EDUCATION ===== -->
+        <section class="sec" id="education">
+            <div class="sec-head"><span>03</span><h2>Education</h2></div>
+            <div class="edu-content">
+                <div class="edu-block">
+                    <h3><a href="https://engineering.rice.edu/" target="_blank">BS - Mechanical Engineering</a></h3>
+                    <span class="detail-date">Aug 2025 - now</span>
+                    <p>George R. Brown School of Engineering and Computing | Rice University</p>
+                    <ul><li>GPA: 3.84 / 4.0</li><li>Martel College</li></ul>
                 </div>
-                <div class="logo-item" data-detail="eclipse">
-                    <img src="./assets/images/eclipse-logo.png" alt="Rice Eclipse">
-                    <span class="exp-meta">Houston TX, USA | Oct 2025 - now</span>
-                </div>
-                <div class="logo-item logo-item--wide-gap" data-detail="tarragon">
-                    <img src="./assets/images/tarragon-logo.svg" alt="Tarragon Aircraft">
-                    <span class="exp-meta">Riga, Latvia | Jun - Aug 2025</span>
+                <div class="edu-block">
+                    <h3><a href="https://izv.lv/#top" target="_blank">Riga Technical University Engineering High School</a></h3>
+                    <span class="detail-date">Sep 2022 - Jul 2025</span>
+                    <ul>
+                        <li>GPA: 9.93 / 10</li>
+                        <li>Student government & event host, tutor, astronomy olympiad, engineering</li>
+                    </ul>
                 </div>
             </div>
+        </section>
 
-            <div class="detail-panel" id="detail-timtec">
-                <button class="detail-back">← Back</button>
+        <!-- ===== CONTACT ===== -->
+        <section class="sec sec--last" id="contact">
+            <div class="sec-head"><span>04</span><h2>Contact</h2></div>
+            <div class="contact-row">
+                <div class="contact-content">
+                <h2>Lets chat!</h2>
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/mvzpjegv" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message →</button>
+                </form>
+                <div class="contact-socials">
+                    <a href="https://www.linkedin.com/in/j%C4%81nis-stendzenieks-751409359/" target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/janis_ste/" target="_blank">Instagram</a>
+                </div>
+            </div>
+                <img class="contact-photo" src="./assets/images/me.jpg" alt="Jānis Stendzenieks">
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOCUS PANELS: one per project / job. Model on top, details below. Add content here. ===== -->
+    <button id="focus-back">← Back</button>
+    <div id="focus-layer">
+        <article class="focus" id="focus-hand">
+            <div class="focus-stage" data-model="hand" data-size="1.5" data-rot="-28 17 90" data-spin="0"></div>
+            <div class="focus-body">
+                
+                <h2>Tendon-Driven Hand</h2>
+                <span class="detail-date">Personal Project | Oct - Nov 2026</span>
+                <div class="project-detail-controls">
+                    <label for="hand-explode-range">Explode View</label>
+                    <input type="range" id="hand-explode-range" min="0" max="100" value="0" class="explode-range">
+                    <label for="hand-grip-range">Grip</label>
+                    <input type="range" id="hand-grip-range" min="0" max="100" value="0" class="explode-range">
+                </div>
+                <div class="detail-role">
+                    <h3>Mechanical Hand Extensions</h3>
+                    <p>Mechanical hand extensions that copy hand movements and gestures</p>
+                    <ul>
+                        <li>Built a tendon-driven palm mechanism: a curled finger pulls a string that curls the matching mechanical finger, rubber bands act as tendons exerting a return force</li>
+                        <li>Designed 14 moving finger links on 14 hinge joints - four 3-segment fingers on a shared knuckle rod plus a 2-segment thumb with string channels built into the palm</li>
+                    </ul>
+                </div>
             
-                <h2>TIMTEC</h2>
+            </div>
+        </article>
+        <article class="focus" id="focus-povcase">
+            <div class="focus-stage" data-model="phone" data-size=".8" data-rot="0 0 0" data-spin="-.35"></div>
+            <div class="focus-body">
+                
+                <h2>iPhone POV Case</h2>
+                <span class="detail-date">Personal Project | Nov 2025 - now</span>
+                <div class="project-detail-controls">
+                    <label for="explode-range">Explode View</label>
+                    <input type="range" id="explode-range" min="0" max="100" value="70" class="explode-range">
+                </div>
+                <div class="detail-role">
+                    <h3>Magnetic Quick-Release</h3>
+                    <p>Latest iteration with quick attachment/detachment function</p>
+                    <ul>
+                        <li>Cost-effective phone camera concept motivated by rising prices for POV cameras like GoPro and Insta360</li>
+                        <li>Designed a two-part magnetic mounting system - phone case + chest-mount system with embedded magnets</li>
+                        <li>3D printed case + chestplate, elastic straps</li>
+                    </ul>
+                </div>
+                <div class="detail-role">
+                    <h3>Regular Mount</h3>
+                    <p>First prototype iteration</p>
+                    <div class="detail-role-media detail-role-media--model">
+                        <canvas id="v1-mount-canvas"></canvas>
+                    </div>
+                    <ul>
+                        <li>Rigid 3D printed phone holder designed around iPhone 14 dimensions</li>
+                        <li>Nylon webbing chest harness</li>
+                    </ul>
+                </div>
+                <div class="pov-footage">
+                    <div class="pov-insta">
+                        <div class="pov-insta-frame">
+                            <!-- Instagram's embed script swaps this for a live preview of the profile and its latest reels -->
+                            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/janisbuildsstuff/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+                                <a class="pov-insta-link" href="https://www.instagram.com/janisbuildsstuff/" target="_blank" rel="noopener">View @janisbuildsstuff on Instagram →</a>
+                            </blockquote>
+                            <a class="pov-insta-foot" href="https://www.instagram.com/janisbuildsstuff/" target="_blank" rel="noopener">View profile on Instagram →</a>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+        </article>
+        <article class="focus" id="focus-tricycle">
+            <div class="focus-stage" data-model="tricycle" data-size="1.25" data-rot="0 0 0" data-spin=".3"></div>
+            <div class="focus-body">
+                
+                <h2>Electric Tricycle</h2>
+                <span class="detail-date">Riga LV | Oct 2024 - Jul 2025</span>
+                <div class="detail-role">
+                    <h3>Lead Mechanical Engineer</h3>
+                    <p>Led a team of students to design and manufacture 4 energy-efficient electric tricycles from recycled materials</p>
+                    <ul>
+                        <li>Fully designed and manufactured 2 electric tricycles from recycled materials, assisted with 2 other e-tricycle builds</li>
+                        <li>Public showcase drive at the 2025 Latvian Song and Dance Festival: 90,000+ attendees, broadcast live on national television (~1.5 million viewers)</li>
+                        <li>Steering mechanism & part design/machining, frame welding, controller electronics & hydraulic brake system setup, soldering</li>
+                    </ul>
+                    <div class="detail-gallery-preview" data-gallery="car" data-index="0">
+                        <img src="./assets/images/car1.jpg" alt="Electric tricycle at Song Festival">
+                        <div class="media-overlay"><span>1 / 3 </span></div>
+                    </div>
+                </div>
+            
+            </div>
+        </article>
+        <article class="focus focus--plain" id="focus-opticalmemory">
+            <div class="focus-body">
+                <div class="project-detail-institution-logo">
+                    <img src="./assets/images/rtu-logo.png" alt="Riga Technical University" class="institution-logo">
+                </div>
+                <h2>Optical Memory Research</h2>
+                <span class="detail-date">RTU Engineering High School | May 2023 - May 2024</span>
+                <div class="detail-role">
+                    <h3>Student Research Intern</h3>
+                    <p>Scientific research at RTU Faculty of Natural Sciences and Technology</p>
+                    <ul>
+                        <li>Designed and manufactured an optically active memory material for photonic storage and computing applications</li>
+                        <li>Gold – National Student Scientific Research Conference, highest score in Engineering &amp; Technology category</li>
+                        <li>20,000+ datapoint analysis in MS Excel, spin-coating, acid etching, soldering, plasma cleaning</li>
+                    </ul>
+                    <div class="pdf-embed-block" id="pdf-embed-inline">
+                        <div class="pdf-embed-title">Development of Ta-TiO₂ nanoparticle-based transient optical memory material</div>
+                        <div class="pdf-embed-frame-wrap" id="pdf-frame-wrap">
+                            <iframe
+                                src="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf"
+                                class="pdf-embed-iframe"
+                                id="pdf-iframe-inline"
+                                title="Optical Memory Research Paper">
+                            </iframe>
+                            <div class="pdf-expand-btn" id="pdf-expand-btn" title="Expand paper">
+                                <span>⤢ Expand</span>
+                            </div>
+                        </div>
+                        <a class="pdf-mobile-link" href="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf" target="_blank">
+                            Open full paper
+                        </a>
+                    </div>
+                </div>
+            
+            </div>
+        </article>
+        <article class="focus focus--plain" id="focus-ethicspaper">
+            <div class="focus-body">
+                
+                <h2>Is Suffering Enough?</h2>
+                <span class="detail-date">Rice University | Black Mirror Philosophy | Fall 2025</span>
+                <div class="detail-role">
+                    <h3>Philosophical Analysis Paper</h3>
+                    <p>Challenging the Utilitarian Test for Moral Status</p>
+                
+                        <p style="color: black; font-style: normal; margin-left: 0; padding-left: 0;">This is a philosophical analysis essay challenging the Argument from Marginal Cases - a widely discussed perspective in moral philosophy. Here's my take on it.</p>
+                    <div class="pdf-embed-block" id="pdf-embed-ethics">
+                        <div class="pdf-embed-title">Is Suffering Enough? Challenging the Utilitarian Test for Moral Status</div>
+                        <div class="pdf-embed-frame-wrap" id="pdf-frame-wrap-ethics">
+                            <iframe
+                                src="./assets/FWIS.pdf"
+                                class="pdf-embed-iframe"
+                                id="pdf-iframe-ethics"
+                                title="Is Suffering Enough Research Paper">
+                            </iframe>
+                            <div class="pdf-expand-btn" id="pdf-expand-btn-ethics" title="Expand paper">
+                                <span>⤢ Expand</span>
+                            </div>
+                        </div>
+                        <a class="pdf-mobile-link" href="./assets/FWIS.pdf" target="_blank">
+                            Open full paper
+                        </a>
+                    </div>
+                </div>
+            
+            </div>
+        </article>
+        <article class="focus focus--plain" id="focus-timtec">
+            <div class="focus-body">
+            
+                <h2 class="focus-logo"><img src="./assets/images/timtec-logo.png" alt="TIMTEC"></h2>
             
                 <span class="detail-date">Vipava, Slovenia | Apr - Jun 2026</span>
             
@@ -234,11 +479,13 @@
                         Due to the nature of this work, I cannot share any photos or produced material, so here is a picture I took hiking in the Slovenian Alps instead.
                     </p>
                 </div>
+            
             </div>
-
-            <div class="detail-panel" id="detail-eclipse">
-                <button class="detail-back">← Back</button>
-                <h2>Rice Eclipse Rocketry</h2>
+        </article>
+        <article class="focus" id="focus-eclipse">
+            <div class="focus-stage" data-model="rocket" data-size="1.1" data-rot="0 0 -62" data-spin=".8"></div>
+            <div class="focus-body">
+                <h2 class="focus-logo"><img src="./assets/images/eclipse-logo.png" alt="Rice Eclipse" class="tall"></h2>
                 <span class="detail-date">Houston TX | Oct 2025 - now</span>
                 
                 <div class="detail-role">
@@ -278,11 +525,12 @@
                         
                     
                 </div>
+            
             </div>
-
-            <div class="detail-panel" id="detail-tarragon">
-                <button class="detail-back">← Back</button>
-                <h2><a href="https://www.tarragonaircraft.com/" target="_blank">Tarragon Aircraft</a></h2>
+        </article>
+        <article class="focus focus--plain" id="focus-tarragon">
+            <div class="focus-body">
+                <h2 class="focus-logo"><a href="https://www.tarragonaircraft.com/" target="_blank"><img src="./assets/images/tarragon-logo.svg" alt="Tarragon Aircraft" class="dark"></a></h2>
                 <span class="detail-date">Riga LV | Jun - Aug 2025</span>
                 <div class="detail-role">
                     <h3>Manufacturing Engineering Intern</h3>
@@ -293,244 +541,11 @@
                     </div>
                         <p style="color: black; font-style: normal; margin-left: 0; padding-left: 0;">At Tarragon, I got to do a lot of hands on manufacturing. I worked on 3 different customer aircraft (similar to the one in the picture) by sanding and surface finishing ultralight carbon composite parts (air intakes, bulkheads, ailerons, fuselage, fuel tanks), as well as bonding those parts with aircraft epoxy resin for fuselage assembly. Additionally, I got to machine load-transfer components for landing gear mechanisms - carbon tubes and joints.</p>
                     </div>
+            
             </div>
-        </div>
+        </article>
     </div>
 
-    <!-- ===== PROJECTS STATE ===== -->
-    <div class="state state--section" id="state-projects">
-        <div class="section-scroll section-scroll--center">
-            <div class="project-cards" id="project-cards">
-                <div class="project-card" data-project="hand">
-                    <h3>Tendon-Driven Hand</h3>
-                    <span class="project-meta">Houston TX, USA | Oct - Nov 2026</span>
-                </div>
-                <div class="project-card" data-project="povcase">
-                    <h3>POV phonecase</h3>
-                    <span class="project-meta">Houston TX, USA | Nov 2025 - now</span>
-                </div>
-                <div class="project-card" data-project="tricycle">
-                    <h3>Electric Tricycle</h3>
-                    <span class="project-meta">Riga, Latvia | Oct 2024 - Jul 2025</span>
-                </div>
-                <div class="project-card" data-project="opticalmemory">
-                    <h3>Optical Material Research</h3>
-                    <span class="project-meta">Riga, Latvia | May 2023 - May 2024</span>
-                </div>
-                <div class="project-card" data-project="ethicspaper">
-                    <h3>Is Suffering Enough? (Philosophy Paper)</h3>
-                    <span class="project-meta">Rice University | Fall 2025</span>
-                </div>
-            </div>
-
-            <!-- Tendon-Driven Hand Detail -->
-            <div class="project-detail" id="project-hand">
-                <button class="detail-back project-back">← Back</button>
-                <div class="project-detail-spacer"></div>
-                <h2>Tendon-Driven Hand</h2>
-                <span class="detail-date">Personal Project | Oct - Nov 2026</span>
-                <div class="project-detail-controls">
-                    <label for="hand-explode-range">Explode View</label>
-                    <input type="range" id="hand-explode-range" min="0" max="100" value="0" class="explode-range">
-                    <label for="hand-grip-range">Grip</label>
-                    <input type="range" id="hand-grip-range" min="0" max="100" value="0" class="explode-range">
-                </div>
-                <div class="detail-role">
-                    <h3>Mechanical Hand Extensions</h3>
-                    <p>Mechanical hand hand extensions that copy hand movements and gestures</p>
-                    <ul>
-                        <li>Built a tendon-driven palm mechanism: a curled finger pulls a string that curls the matching mechanical finger, rubber bands act as tendons exerting a return force</li>
-                        <li>Designed 14 moving finger links on 14 hinge joints - four 3-segment fingers on a shared knuckle rod plus a 2-segment thumb with string channels built into the palm</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- POV Case Detail -->
-            <div class="project-detail" id="project-povcase">
-                <button class="detail-back project-back">← Back</button>
-                <div class="project-detail-spacer"></div>
-                <h2>iPhone POV Case</h2>
-                <span class="detail-date">Personal Project | Nov 2025 - now</span>
-                <div class="project-detail-controls">
-                    <label for="explode-range">Explode View</label>
-                    <input type="range" id="explode-range" min="0" max="100" value="70" class="explode-range">
-                </div>
-                <div class="detail-role">
-                    <h3>Magnetic Quick-Release</h3>
-                    <p>Latest iteration with quick attachment/detachment function</p>
-                    <ul>
-                        <li>Cost-effective phone camera concept motivated by rising prices for POV cameras like GoPro and Insta360</li>
-                        <li>Designed a two-part magnetic mounting system - phone case + chest-mount system with embedded magnets</li>
-                        <li>3D printed case + chestplate, elastic straps</li>
-                    </ul>
-                </div>
-                <div class="detail-role">
-                    <h3>Regular Mount</h3>
-                    <p>First prototype iteration</p>
-                    <div class="detail-role-media detail-role-media--model">
-                        <canvas id="v1-mount-canvas"></canvas>
-                    </div>
-                    <ul>
-                        <li>Rigid 3D printed phone holder designed around iPhone 14 dimensions</li>
-                        <li>Nylon webbing chest harness</li>
-                    </ul>
-                </div>
-                <div class="pov-footage">
-                    <div class="pov-insta">
-                        <div class="pov-insta-frame">
-                            <!-- Instagram's embed script swaps this for a live preview of the profile and its latest reels -->
-                            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/janisbuildsstuff/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
-                                <a class="pov-insta-link" href="https://www.instagram.com/janisbuildsstuff/" target="_blank" rel="noopener">View @janisbuildsstuff on Instagram →</a>
-                            </blockquote>
-                            <a class="pov-insta-foot" href="https://www.instagram.com/janisbuildsstuff/" target="_blank" rel="noopener">View profile on Instagram →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Optical Memory Detail -->
-            <div class="project-detail" id="project-opticalmemory">
-                <button class="detail-back project-back">← Back</button>
-                <div class="project-detail-institution-logo">
-                    <img src="./assets/images/rtu-logo.png" alt="Riga Technical University" class="institution-logo">
-                </div>
-                <h2>Optical Memory Research</h2>
-                <span class="detail-date">RTU Engineering High School | May 2023 - May 2024</span>
-                <div class="detail-role">
-                    <h3>Student Research Intern</h3>
-                    <p>Scientific research at RTU Faculty of Natural Sciences and Technology</p>
-                    <ul>
-                        <li>Designed and manufactured an optically active memory material for photonic storage and computing applications</li>
-                        <li>Gold – National Student Scientific Research Conference, highest score in Engineering &amp; Technology category</li>
-                        <li>20,000+ datapoint analysis in MS Excel, spin-coating, acid etching, soldering, plasma cleaning</li>
-                    </ul>
-                    <div class="pdf-embed-block" id="pdf-embed-inline">
-                        <div class="pdf-embed-title">Development of Ta-TiO₂ nanoparticle-based transient optical memory material</div>
-                        <div class="pdf-embed-frame-wrap" id="pdf-frame-wrap">
-                            <iframe
-                                src="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf"
-                                class="pdf-embed-iframe"
-                                id="pdf-iframe-inline"
-                                title="Optical Memory Research Paper">
-                            </iframe>
-                            <div class="pdf-expand-btn" id="pdf-expand-btn" title="Expand paper">
-                                <span>⤢ Expand</span>
-                            </div>
-                        </div>
-                        <a class="pdf-mobile-link" href="./assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf" target="_blank">
-                            Open full paper
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ethics / Moral Status Paper Detail -->
-            <div class="project-detail" id="project-ethicspaper">
-                <button class="detail-back project-back">← Back</button>
-                <div class="project-detail-spacer"></div>
-                <h2>Is Suffering Enough?</h2>
-                <span class="detail-date">Rice University | Black Mirror Philosophy | Fall 2025</span>
-                <div class="detail-role">
-                    <h3>Philosophical Analysis Paper</h3>
-                    <p>Challenging the Utilitarian Test for Moral Status</p>
-                
-                        <p style="color: black; font-style: normal; margin-left: 0; padding-left: 0;">This is a philosophical analysis essay challenging the Argument from Marginal Cases - a widely discussed perspective in moral philosophy. Here's my take on it.</p>
-                    <div class="pdf-embed-block" id="pdf-embed-ethics">
-                        <div class="pdf-embed-title">Is Suffering Enough? Challenging the Utilitarian Test for Moral Status</div>
-                        <div class="pdf-embed-frame-wrap" id="pdf-frame-wrap-ethics">
-                            <iframe
-                                src="./assets/FWIS.pdf"
-                                class="pdf-embed-iframe"
-                                id="pdf-iframe-ethics"
-                                title="Is Suffering Enough Research Paper">
-                            </iframe>
-                            <div class="pdf-expand-btn" id="pdf-expand-btn-ethics" title="Expand paper">
-                                <span>⤢ Expand</span>
-                            </div>
-                        </div>
-                        <a class="pdf-mobile-link" href="./assets/FWIS.pdf" target="_blank">
-                            Open full paper
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tricycle Detail -->
-            <div class="project-detail" id="project-tricycle">
-                <button class="detail-back project-back">← Back</button>
-                <div class="project-detail-spacer"></div>
-                <h2>Electric Tricycle</h2>
-                <span class="detail-date">Riga LV | Oct 2024 - Jul 2025</span>
-                <div class="detail-role">
-                    <h3>Lead Mechanical Engineer</h3>
-                    <p>Led a team of students to design and manufacture 4 energy-efficient electric tricycles from recycled materials</p>
-                    <ul>
-                        <li>Fully designed and manufactured 2 electric tricycles from recycled materials, assisted with 2 other e-tricycle builds</li>
-                        <li>Public showcase drive at the 2025 Latvian Song and Dance Festival: 90,000+ attendees, broadcast live on national television (~1.5 million viewers)</li>
-                        <li>Steering mechanism & part design/machining, frame welding, controller electronics & hydraulic brake system setup, soldering</li>
-                    </ul>
-                    <div class="detail-gallery-preview" data-gallery="car" data-index="0">
-                        <img src="./assets/images/car1.jpg" alt="Electric tricycle at Song Festival">
-                        <div class="media-overlay"><span>1 / 3 </span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="state state--section" id="state-education">
-        <div class="section-scroll section-scroll--center">
-            <div class="edu-content">
-                <div class="edu-block">
-                    <h3><a href="https://engineering.rice.edu/" target="_blank">BS - Mechanical Engineering</a></h3>
-                    <span class="detail-date">Aug 2025 - now</span>
-                    <p>George R. Brown School of Engineering and Computing | Rice University</p>
-                    <ul><li>GPA: 3.84 / 4.0</li><li>Martel College</li></ul>
-                </div>
-                <div class="edu-block">
-                    <h3><a href="https://izv.lv/#top" target="_blank">Riga Technical University Engineering High School</a></h3>
-                    <span class="detail-date">Sep 2022 - Jul 2025</span>
-                    <ul>
-                        <li>GPA: 9.93 / 10</li>
-                        <li>Student government & event host, tutor, astronomy olympiad, engineering</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== CONTACT STATE ===== -->
-    <div class="state state--section" id="state-contact">
-        <img src="./assets/images/fly.jpg" alt="" class="contact-bg">
-        <div class="section-scroll section-scroll--center">
-            <div class="contact-content">
-                <h2>Lets chat!</h2>
-                <form id="contact-form" class="contact-form" action="https://formspree.io/f/mvzpjegv" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message →</button>
-                </form>
-                <div class="contact-socials">
-                    <a href="https://www.linkedin.com/in/j%C4%81nis-stendzenieks-751409359/" target="_blank">LinkedIn</a>
-                    <a href="https://www.instagram.com/janis_ste/" target="_blank">Instagram</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lightbox -->
     <div id="image-lightbox" class="lightbox">
         <div class="lightbox-close">&times;</div>
         <div class="lightbox-prev">&#8249;</div>
@@ -541,7 +556,6 @@
         </div>
     </div>
 
-    <!-- PDF Lightbox -->
     <div id="pdf-lightbox">
         <div id="pdf-lightbox-close">&times;</div>
         <div id="pdf-lightbox-inner">
@@ -551,59 +565,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-    <script src="./scripts/hand.js"></script>
-    <script src="./scripts/app.js"></script>
-    <script>
-        (function() {
-            var PDF_SRC = './assets/Development of Ta-TiO2 nanoparticle-based transient  optical memory material  .pdf';
-            var lightbox = document.getElementById('pdf-lightbox');
-            var lbIframe = document.getElementById('pdf-lightbox-iframe');
-            var lbClose  = document.getElementById('pdf-lightbox-close');
-            var expandBtn = document.getElementById('pdf-expand-btn');
-
-            function openPdfLightbox() {
-                lbIframe.src = PDF_SRC;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            function closePdfLightbox() {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-                setTimeout(function() { lbIframe.src = ''; }, 300);
-            }
-
-            if (expandBtn) expandBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                openPdfLightbox();
-            });
-
-            if (lbClose) lbClose.addEventListener('click', closePdfLightbox);
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) closePdfLightbox();
-            });
-
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                    closePdfLightbox();
-                }
-            });
-        })();
-    </script>
-    <!-- Expand-to-lightbox wiring for the new "Is Suffering Enough?" PDF embed (mirrors the block above, additive only) -->
-    <script>
-        (function() {
-            var PDF_SRC_ETHICS = './assets/Is Suffering Enough - Challenging the Utilitarian Test for Moral Status.pdf';
-            var lightbox = document.getElementById('pdf-lightbox');
-            var lbIframe = document.getElementById('pdf-lightbox-iframe');
-            var expandBtn = document.getElementById('pdf-expand-btn-ethics');
-
-            if (expandBtn) expandBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                lbIframe.src = PDF_SRC_ETHICS;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        })();
-    </script>
+    <script src="./scripts/hand.js?v=1795406946"></script>
+    <script src="./scripts/site.js?v=1795406946"></script>
+    <script src="./scripts/look.js?v=1795406946"></script>
 </body>
 </html>
